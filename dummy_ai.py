@@ -8,9 +8,7 @@
 '''
 from CONNSIX import connsix
 import random 
-
-def make_move():
-	return chr(random.randint(65, 84)) + str(random.randint(1, 19)) + ":" + chr(random.randint(65, 84)) + str(random.randint(1, 19))
+import utils
 
 def main():
 	ip = input("input ip: ")
@@ -28,7 +26,7 @@ def main():
 		away_move = connsix.draw_and_read("")
 		print("Received first away move from server: " + away_move)
 	while 1:
-		away_move = connsix.draw_and_read(make_move())
+		away_move = connsix.draw_and_read(utils.make_move())
 		print("Received away move from server: " + away_move)
 
 
