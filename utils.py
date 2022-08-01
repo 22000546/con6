@@ -6,20 +6,25 @@ import ai
 import random 
 
 def make_move(board):
-	return chr(random.randint(65, 84)) + str(random.randint(1, 19)) + ":" + chr(random.randint(65, 84)) + str(random.randint(1, 19))
+	# 1. 내가 끝낼 수 있는 경우
+	# 2. 내가 무조건 막아야 하는 경우
+	# 3. 상대가 돌 2개를 사용하도록 공격하는 경우
+	# 4. 상대가 돌 1개를 사용하도록 공격하는 경우
+	# 5. 아무것도 할 게 없는 경우 (랜덤)
+	result = find_random(board)
+	return num_to_coor(result)
 
 def num_to_coor(lst):
-    result = ""
-
-    for (x,y) in lst:
-        if x > 8 :
-            x += 1
-        row = chr(x+65)
-        col = y + 1 
-        result.append(":"+row+str(col))
-    result = result[1:]
-            
-    return result 
+	result = ""
+	
+	for (x,y) in lst:
+		if x > 7 :
+			x += 1
+		row = chr(x+65)
+		col = 19 - y
+		result = result + ":" + row + str(col)
+	result = result[1:]      
+	return result 
 
 def get_board(ai_home):
     # A~T (I 제외)
@@ -46,3 +51,20 @@ def get_board(ai_home):
             else:    
                 board[y][x] = -1 
     return board 
+
+def find_random(board):
+	lst = []
+	x1 = random.randint(0, 18)
+	y1 = random.randint(0, 18)
+	while board[y1][x1] != 0:
+		x1 = random.randint(0, 18)
+		y1 = random.randint(0, 18)
+	lst.append((x1, y1))
+
+	x2 = random.randint(0, 18)
+	y2 = random.randint(0, 18)
+	while board[y2][x2] != 0:
+		x2 = random.randint(0, 18)
+		y2 = random.randint(0, 18)
+	lst.append((x2, y2))
+	return lst
