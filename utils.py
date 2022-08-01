@@ -8,6 +8,19 @@ import random
 def make_move(board):
 	return chr(random.randint(65, 84)) + str(random.randint(1, 19)) + ":" + chr(random.randint(65, 84)) + str(random.randint(1, 19))
 
+def num_to_coor(lst):
+    result = ""
+
+    for (x,y) in lst:
+        if x > 8 :
+            x += 1
+        row = chr(x+65)
+        col = y + 1 
+        result.append(":"+row+str(col))
+    result = result[1:]
+            
+    return result 
+
 def get_board(ai_home):
     # A~T (I 제외)
     # 1~19
