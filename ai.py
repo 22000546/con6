@@ -21,7 +21,8 @@ def main():
 		away_move = connsix.draw_and_read("")
 		print("Received first away move from server: " + away_move)
 	while 1:
-		away_move = connsix.draw_and_read(utils.make_move())
+		board = utils.get_board(ai_home)
+		away_move = connsix.draw_and_read(utils.make_move(board))
 		print("Received away move from server: " + away_move)
 
 if __name__ == "__main__":
