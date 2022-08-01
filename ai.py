@@ -14,15 +14,19 @@ def main():
 	if len(red_stones):	
 		print("Received red stones from server: " + red_stones)
 
-	if ai_home == 'BLACK':
+	if ai_home == "BLACK":
 		away_move = connsix.draw_and_read("K10")
+		utils.set_ai_move([(9, 9)])
+		utils.set_away_move(away_move)
 		print("Received first away move from server: " + away_move)
 	else:
 		away_move = connsix.draw_and_read("")
+		utils.set_away_move(away_move)
 		print("Received first away move from server: " + away_move)
 	while 1:
 		board = utils.get_board(ai_home)
 		away_move = connsix.draw_and_read(utils.make_move(board))
+		utils.set_away_move(away_move)
 		print("Received away move from server: " + away_move)
 
 if __name__ == "__main__":
