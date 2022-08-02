@@ -1,12 +1,12 @@
 import random
 from itertools import combinations
+import utils 
 
-def diagonal_RD_search(x, y, num, find): # left top to right down 
+def diagonal_RD_search(board, x, y, num, find): # left top to right down 
     flag = sum = 0
     RD = []
     for i in range(num-1, -1, -1):
         # case : y-i, x-i 
-        print(y-i, x-i )
         if y-i+(num-1) > 18 or x-i+(num-1) > 18:
             break
         if y-i > 18 or y-i < 0 or x-i > 18 or x-i < 0:
@@ -21,7 +21,8 @@ def diagonal_RD_search(x, y, num, find): # left top to right down
         if sum == find:
             RD.append((x-i,y-i))
 
-    print("RD", RD)
+    if len(RD) > 0:
+        print("RD", RD)
     
     res = []
     if len(RD) > 0:
@@ -34,7 +35,7 @@ def diagonal_RD_search(x, y, num, find): # left top to right down
 
     return res
 
-def diagonal_RU_search(x, y, num, find): # left bottom to right up 
+def diagonal_RU_search(board, x, y, num, find): # left bottom to right up 
     flag = sum = 0
     RU = []
     for i in range(num-1, -1, -1):
@@ -52,7 +53,8 @@ def diagonal_RU_search(x, y, num, find): # left bottom to right up
         if sum == find:
             RU.append((x-i,y+i))
     
-    print("RU", RU)
+    if len(RU) > 0:
+        print("RU", RU)
     
     res = []
     if len(RU) > 0:
@@ -64,7 +66,7 @@ def diagonal_RU_search(x, y, num, find): # left bottom to right up
             res.extend(list(combinations(items, 2)))
     return res
 
-def horizontal_search(x, y, num, find):  # left to right 
+def horizontal_search(board, x, y, num, find):  # left to right 
     flag = sum = 0
     hori = []
     for i in range(num-1, -1, -1):
@@ -81,7 +83,8 @@ def horizontal_search(x, y, num, find):  # left to right
         if sum == find:
             hori.append((x-i,y))
         
-    print("hori", hori)
+    if len(hori) > 0 :
+        print("hori", hori)
     
     res = []
     if len(hori) > 0:
@@ -93,7 +96,7 @@ def horizontal_search(x, y, num, find):  # left to right
             res.extend(list(combinations(items, 2)))
     return res
 
-def vertical_search(x, y, num, find): # top to bottom 
+def vertical_search(board, x, y, num, find): # top to bottom 
     flag = sum = 0
     ver = [] # starting point of pattern 
     for i in range(num-1, -1, -1):
@@ -110,7 +113,8 @@ def vertical_search(x, y, num, find): # top to bottom
         if sum == find:
             ver.append((x,y-i))
     
-    print("ver", ver)
+    if len(ver) >0 :
+        print("ver", ver)
     
     res = []
     if len(ver) > 0:
@@ -128,6 +132,8 @@ def algo4(left, stone, board):
     ret = []
     while left > 0 :
         res = find_3stones_close(stone, board)
+        if len(res) == 0:
+            return ret 
         rand = random.randint(0,len(res)-1)
         x,y = res[rand]
         board[y][x] = 1
@@ -137,64 +143,66 @@ def algo4(left, stone, board):
 
 
 def find_2stones_close(stone, board):
-    global last_ai_move, last_away_move
+    last_ai_move = utils.get_ai_move()
+    last_away_move = utils.get_away_move()
 
-	lst = []
+    lst = []
 
     if stone == 1: # find ai stones 
         if last_ai_move == None:
             print("first time to place ai stones")
-            return None
+            return lst 
         else :
             for (x,y) in last_ai_move:
                 # print((x,y),"-----------------------------------")
-                hori = horizontal_search(x, y, 6, 2)
+                hori = horizontal_search(board, x, y, 6, 2)
                 lst.extend(hori)
                 # print("hori res", hori)
 
-                ver = vertical_search(x, y, 6, 2)
+                ver = vertical_search(board, x, y, 6, 2)
                 lst.extend(ver)
                 # print("ver res", ver)
 
-                RU = diagonal_RU_search(x, y, 6, 2)
+                RU = diagonal_RU_search(board, x, y, 6, 2)
                 lst.extend(RU)
                 # print("RU res", RU)
 
-                RD = diagonal_RD_search(x, y, 6, 2)
+                RD = diagonal_RD_search(board, x, y, 6, 2)
                 lst.extend(RD)
                 # print("RD res", RD)
     # else : # find away stones 
 
-	return lst
+    return lst
 
 def find_3stones_close(stone, board):
-    global last_ai_move, last_away_move
+    last_ai_move = utils.get_ai_move()
+    last_away_move = utils.get_away_move()
 
-	lst = []
+    lst = []
 
     if stone == 1: # find ai stones 
         if last_ai_move == None:
             print("first time to place ai stones")
-            return None
+            return lst
         else :
             for (x,y) in last_ai_move:
                 # print((x,y),"-----------------------------------")
-                hori = horizontal_search(x, y, 6, 3)
+                hori = horizontal_search(board, x, y, 6, 3)
                 lst.extend(hori)
                 # print("hori res", hori)
 
-                ver = vertical_search(x,y, 6, 3)
+                ver = vertical_search(board, x,y, 6, 3)
                 lst.extend(ver)
                 # print("ver res", ver)
 
-                RU = diagonal_RU_search(x,y, 6, 3)
+                RU = diagonal_RU_search(board, x,y, 6, 3)
                 lst.extend(RU)
                 # print("RU res", RU)
 
-                RD = diagonal_RD_search(x,y, 6, 3)
+                RD = diagonal_RD_search(board, x,y, 6, 3)
                 lst.extend(RD)
                 # print("RD res", RD)
 
     # else : # find away stones 
 
-	return lst
+    return lst
