@@ -26,6 +26,8 @@ def main():
 	while 1:
 		board = utils.get_board(ai_home)
 		away_move = connsix.draw_and_read(utils.make_move(board))
+		if away_move == "WIN" or away_move == "LOSE" or away_move == "EVEN":
+			break
 		utils.set_away_move(away_move)
 		print("Received away move from server: " + away_move)
 
