@@ -159,20 +159,37 @@ def vertical_search(board, x, y, num, find): # top to bottom
 
 
 def algo4(left, stone, board):
-    # find 3stones close 
+    
     ret = []
 
-    prev_set = []
+    # find 3stones close 
     while left > 0 :
         res = find_3stones_close(stone, board)
         if len(res) == 0:
-            return ret 
+            break
         print("res len", len(res))
         rand = random.randint(0, len(res)-1)
         x,y = res[rand]
         board[y][x] = 1
         ret.append((x,y))
         left -= 1
+    
+    # find 2stones close 
+    if left == 2:
+        res = find_2stones_close(stone, board)
+        if len(res) == 0:
+            return ret 
+        select_set = random.randint(0, len(res)-1)
+        while 1:
+            r1 = random.randint(0, len(res[select_set])-1)
+            r2 = random.randint(0, len(res[select_set])-1)
+            if r1 != r2:    break 
+        (x,y) = res[select_set][r1]
+        (x1,y1) = res[select_set][r2]
+        board[y][x] = 1
+        board[y1][x1] = 1
+        ret.append((x,y))
+        ret.append((x1,y1))
     return ret 
 
 def find_3stones_close(stone, board):
