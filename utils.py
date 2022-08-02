@@ -88,6 +88,7 @@ def make_move(board):
 	left -= len(result)
  
 	ai_move_log += final_result
+	# ai_move_log = last_ai_move + final_result
 	last_ai_move = final_result
 	print(final_result)
 	return num_to_coor(final_result)
