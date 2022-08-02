@@ -4,6 +4,7 @@
 from regex import B
 from CONNSIX import connsix
 import algo1
+import algo2
 import algo7
 
 last_ai_move = None #[(x,y)] list
@@ -30,32 +31,31 @@ def make_move(board):
 	left = 2
  
 	# 1. 내가 끝낼 수 있는 경우
-	result = algo1.find_5stones_open(1, board, left)
+	result = algo1.algo1(1, board, left)
+	if len(result) != 0:
+		print("algo1 : ", len(result))
 	final_result = result
 	left -= len(result)
-	result = algo1.find_4stones_open(1, board, left)
-	final_result += result
-	left -= len(result)
 	# 2. 내가 무조건 막아야 하는 경우
-	result = algo1.find_5stones_open(10, board, left)
-	final_result += result
-	left -= len(result)
-	result = algo1.find_4stones_open(10, board, left)
+	result = algo2.algo2(10, board, left)
+	if len(result) != 0:
+		print("algo2 : ", len(result))
 	final_result += result
 	left -= len(result)
 	# 3. 상대가 돌 2개를 사용하도록 공격하는 경우
 	# 4. 상대가 돌 1개를 사용하도록 공격하는 경우
 	# 5. 방어하는 경우
 	# 6. 아무것도 할 게 없는 경우 (코너 -> 랜덤)
-	result = algo7.find_corner(board, left)
-	final_result += result
-	left -= len(result)
+	# result = algo7.find_corner(board, left)
+	# final_result += result
+	# left -= len(result)
 	result = algo7.find_random(1, board, left)
+	if(len(result) != 0):
+		print("algo7 : ", len(result))
 	final_result += result
 	left -= len(result)
  
 	last_ai_move = final_result
-	print(last_ai_move)
 	return num_to_coor(final_result)
 
 def num_to_coor(lst):
