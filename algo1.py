@@ -75,6 +75,7 @@ def find_5stones_open(stone, board, left):
 	if len(lst) != 0:
 		select = random.randint(0, len(lst)-1)
 		lst = lst[select]
+		board[lst[0][1]][lst[0][0]] = 1
   			
 	return lst
 
@@ -145,5 +146,6 @@ def find_4stones_open(stone, board, left):
 	if len(lst) != 0:
 		select = random.randint(0, len(lst)-1)
 		lst = lst[select]
+		board[lst[0][1]][lst[0][0]] = 1
 					
 	return lst
