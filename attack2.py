@@ -5,6 +5,8 @@ import random
 def attack_2(board, my_last_points, left):
     # 3-1 내가 돌 1개만 사용
 	to_put = []
+	if left ==0:
+		return to_put
 	if left == 2:
 		# 일단 1개 써서 만들 수 있는 공격 있는지 해보고
 		points = open3(board, my_last_points)
