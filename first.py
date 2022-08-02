@@ -5,56 +5,56 @@ def find_open(board, point):
     open = 0
     total_open = 0
     for i in range(6):
-        if board[point[1]-i][point[0]] == 0:
+        if board[point[1]-i][point[0]] != 100:
             open += 1
         else:
             open = 0
     total_open += open
     open = 0
     for i in range(6):
-        if board[point[1]+i][point[0]] == 0:
+        if board[point[1]+i][point[0]] != 100:
             open += 1
         else:
             open = 0
     total_open += open
     open = 0
     for i in range(6):
-        if board[point[1]-i][point[0]-i] == 0:
+        if board[point[1]-i][point[0]-i] != 100:
             open += 1
         else:
             open = 0
     total_open += open
     open = 0
     for i in range(6):
-        if board[point[1]-i][point[0]+i] == 0:
+        if board[point[1]-i][point[0]+i] != 100:
             open += 1
         else:
             open = 0
     total_open += open
     open = 0
     for i in range(6):
-        if board[point[1]+i][point[0]-i] == 0:
+        if board[point[1]+i][point[0]-i] != 100:
             open += 1
         else:
             open = 0
     total_open += open
     open = 0
     for i in range(6):
-        if board[point[1]+i][point[0]+i] == 0:
+        if board[point[1]+i][point[0]+i] != 100:
             open += 1
         else:
             open = 0
     total_open += open
     open = 0
     for i in range(6):
-        if board[point[1]][point[0]-i] == 0:
+        if board[point[1]][point[0]-i] != 100:
             open += 1
         else:
             open = 0
     total_open += open
     open = 0
     for i in range(6):
-        if board[point[1]][point[0]+i] == 0:
+        if board[point[1]][point[0]+i] != 100:
             open += 1
         else:
             open = 0
