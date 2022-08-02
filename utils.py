@@ -13,6 +13,7 @@ import attack2
 last_ai_move = None #[(x,y)] list
 last_away_move = None
 ai_move_log = None
+away_move_log = []
 
 def set_ai_move(ai_move):
 	global last_ai_move, ai_move_log
@@ -20,8 +21,9 @@ def set_ai_move(ai_move):
 	ai_move_log = last_ai_move
 
 def set_away_move(away_move):
-	global last_away_move
+	global last_away_move, away_move_log
 	last_away_move = coor_to_num(away_move)
+	away_move_log += last_away_move
  
 def get_ai_move():
 	global last_ai_move
@@ -35,12 +37,14 @@ def get_ai_move_log():
     global ai_move_log
     return ai_move_log    
 
+def get_away_move_log():
+    global away_move_log
+    return away_move_log
+
 def make_move(board):
 	global last_ai_move, last_away_move, ai_move_log
 	left = 2
- 
-	print(ai_move_log)
-	
+ 	
 	if last_ai_move == None:
 		final_result = first.find_first(board)
 		ai_move_log = final_result

@@ -22,7 +22,7 @@ def algo2(stone, board, left):
   
 def find_5stones_close(stone, board, left):
     ai_move_log = utils.get_ai_move_log()
-    last_away_move = utils.get_away_move()
+    away_move_log = utils.get_away_move_log()
     lst = []
     
     if left == 0:
@@ -31,7 +31,7 @@ def find_5stones_close(stone, board, left):
     if stone == 1:
         stone_list = ai_move_log
     else:
-        stone_list = last_away_move
+        stone_list = away_move_log
         
     for (x, y) in stone_list:
         # 양 옆
@@ -83,7 +83,7 @@ def find_5stones_close(stone, board, left):
 
 def find_4stones_close(stone, board, left):
     ai_move_log = utils.get_ai_move_log()
-    last_away_move = utils.get_away_move()
+    away_move_log = utils.get_away_move_log()
     lst = []
     
     if left == 0:
@@ -92,7 +92,7 @@ def find_4stones_close(stone, board, left):
     if stone == 1:
         stone_list = ai_move_log
     else:
-        stone_list = last_away_move
+        stone_list = away_move_log
         
     for (x, y) in stone_list:
         # 양 옆
