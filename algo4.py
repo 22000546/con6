@@ -167,7 +167,6 @@ def algo4(left, stone, board):
         res = find_3stones_close(stone, board)
         if len(res) == 0:
             break
-        print("res len", len(res))
         rand = random.randint(0, len(res)-1)
         x,y = res[rand]
         board[y][x] = 1
@@ -179,6 +178,7 @@ def algo4(left, stone, board):
         res = find_2stones_close(stone, board)
         if len(res) == 0:
             return ret 
+        print("find 2stones close")
         select_set = random.randint(0, len(res)-1)
         rand = random.randint(0, len(res[select_set])-1)
         (x,y),(x1,y1) = res[select_set][rand]
