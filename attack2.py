@@ -169,18 +169,16 @@ def open2(board, my_last_points):
 			if(board[last_y][last_x-2]==0 and board[last_y][last_x-1]==0):
 				if(board[last_y][last_x+1] + board[last_y][last_x+2] + board[last_y][last_x+3] == 1):
 					if(board[last_y][last_x+4] == 0 and board[last_y][last_x+5] == 0):
-						print('case1')
 						for i in range(last_x, last_x+4):
 							if board[last_y][i] == 0:
 								temp.append((i, last_y))
 								#board[last_y][i] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		if(last_x >= 3 and last_x <= 14):
 			if(board[last_y][last_x-3]==0 and board[last_y][last_x-2]==0):
 				if(board[last_y][last_x-1] + board[last_y][last_x+1] + board[last_y][last_x+2] == 1):
 					if(board[last_y][last_x+3] == 0 and board[last_y][last_x+4] == 0):
-						print('case2')
 						for i in range(last_x-1, last_x+3):
 							if board[last_y][i] == 0:
 								temp.append((i, last_y))
@@ -191,7 +189,6 @@ def open2(board, my_last_points):
 			if(board[last_y][last_x-4]==0 and board[last_y][last_x-3]==0):
 				if(board[last_y][last_x-2] + board[last_y][last_x-1] + board[last_y][last_x+1] == 1):
 					if(board[last_y][last_x+2] == 0 and board[last_y][last_x+3] == 0):
-						print('case3')
 						for i in range(last_x-2, last_x+2):
 							if board[last_y][i] == 0:
 								temp.append((i, last_y))
@@ -202,7 +199,6 @@ def open2(board, my_last_points):
 			if(board[last_y][last_x-5]==0 and board[last_y][last_x-4]==0):
 				if(board[last_y][last_x-3] + board[last_y][last_x-2] + board[last_y][last_x-1] == 1):
 					if(board[last_y][last_x+1] == 0 and board[last_y][last_x+2] == 0):
-						print('case4')
 						for i in range(last_x-3, last_x+1):
 							if board[last_y][i] == 0:
 								temp.append((i, last_y))
@@ -212,125 +208,125 @@ def open2(board, my_last_points):
 		# |방향
 		if(last_y >= 2 and last_y <= 13):
 			if(board[last_y-2][last_x]==0 and board[last_y-1][last_x]==0):
-				if(board[last_y+1][last_x] + board[last_y+2][last_x] + board[last_y+3][last_x] == 2):
+				if(board[last_y+1][last_x] + board[last_y+2][last_x] + board[last_y+3][last_x] == 1):
 					if(board[last_y+4][last_x] == 0 and board[last_y+5][last_x] == 0):
 						for i in range(last_y, last_y+4):
 							if board[i][last_x] == 0:
 								temp.append((last_x, i))
 								#board[i][last_x] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		if(last_y >= 3 and last_y <= 14):
 			if(board[last_y-3][last_x]==0 and board[last_y-2][last_x]==0):
-				if(board[last_y-1][last_x] + board[last_y+1][last_x] + board[last_y+2][last_x] == 2):
+				if(board[last_y-1][last_x] + board[last_y+1][last_x] + board[last_y+2][last_x] == 1):
 					if(board[last_y+3][last_x] == 0 and board[last_y+4][last_x] == 0):
 						for i in range(last_y-1, last_y+3):
 							if board[i][last_x] == 0:
 								temp.append((last_x, i))
 								#board[i][last_x] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		if(last_y >= 4 and last_y <= 15):
 			if(board[last_y-4][last_x]==0 and board[last_y-3][last_x]==0):
-				if(board[last_y-2][last_x] + board[last_y-1][last_x] + board[last_y+1][last_x] == 2):
+				if(board[last_y-2][last_x] + board[last_y-1][last_x] + board[last_y+1][last_x] == 1):
 					if(board[last_y+2][last_x] == 0 and board[last_y+3][last_x] == 0):
 						for i in range(last_y-2, last_y+2):
 							if board[i][last_x] == 0:
 								temp.append((last_x, i))
 								#board[i][last_x] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		if(last_y >= 5 and last_y <= 16):
 			if(board[last_y-5][last_x]==0 and board[last_y-4][last_x]==0):
-				if(board[last_y-3][last_x] + board[last_y-2][last_x] + board[last_y-1][last_x] == 2):
+				if(board[last_y-3][last_x] + board[last_y-2][last_x] + board[last_y-1][last_x] == 1):
 					if(board[last_y+1][last_x] == 0 and board[last_y+2][last_x] == 0):
 						for i in range(last_y-3, last_y+1):
 							if board[i][last_x] == 0:
 								temp.append((last_x, i))
 								#board[i][last_x] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		# \방향
 		if(last_x >= 2 and last_x <= 13 and last_y >=2 and last_y <=13):
 			if(board[last_y-2][last_x-2]==0 and board[last_y-1][last_x-1]==0):
-				if(board[last_y+1][last_x+1] + board[last_y+2][last_x+2] + board[last_y+3][last_x+3] == 2):
+				if(board[last_y+1][last_x+1] + board[last_y+2][last_x+2] + board[last_y+3][last_x+3] == 1):
 					if(board[last_y+4][last_x+4] == 0 and board[last_y+5][last_x+5] == 0):
 						for i in range(0, 4):
 							if board[last_y+i][last_x+i] == 0:
 								temp.append((last_x+i, last_y+i))
 								#board[last_y+i][last_x+i] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		if(last_x >= 3 and last_x <= 14 and last_y >=3 and last_y <=14):
 			if(board[last_y-3][last_x-3]==0 and board[last_y-2][last_x-2]==0):
-				if(board[last_y-1][last_x-1] + board[last_y+1][last_x+1] + board[last_y+2][last_x+2] == 2):
+				if(board[last_y-1][last_x-1] + board[last_y+1][last_x+1] + board[last_y+2][last_x+2] == 1):
 					if(board[last_y+3][last_x+3] == 0 and board[last_y+4][last_x+4] == 0):
 						for i in range(-1, 3):
 							if board[last_y+i][last_x+i] == 0:
 								temp.append((last_x+i, last_y+i))
 								#board[last_y+i][last_x+i] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		if(last_x >= 4 and last_x <= 15 and last_y >=4 and last_y <=15):
 			if(board[last_y-4][last_x-4]==0 and board[last_y-3][last_x-3]==0):
-				if(board[last_y-2][last_x-2] + board[last_y-1][last_x-1] + board[last_y+1][last_x+1] == 2):
+				if(board[last_y-2][last_x-2] + board[last_y-1][last_x-1] + board[last_y+1][last_x+1] == 1):
 					if(board[last_y+2][last_x+2] == 0 and board[last_y+3][last_x+3] == 0):
 						for i in range(-2, 2):
 							if board[last_y+i][last_x+i] == 0:
 								temp.append((last_x+i, last_y+i))
 								#board[last_y+i][last_x+i] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		if(last_x >= 5 and last_x <= 16 and last_y >=5 and last_y <=16):
 			if(board[last_y-5][last_x-5]==0 and board[last_y-4][last_x-4]==0):
-				if(board[last_y-3][last_x-3] + board[last_y-2][last_x-2] + board[last_y-1][last_x-1] == 2):
+				if(board[last_y-3][last_x-3] + board[last_y-2][last_x-2] + board[last_y-1][last_x-1] == 1):
 					if(board[last_y+1][last_x+1] == 0 and board[last_y+2][last_x+2] == 0):
 						for i in range(-3, 1):
 							if board[last_y+i][last_x+i] == 0:
 								temp.append((last_x+i, last_y+i))
 								#board[last_y+i][last_x+i] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		# /방향
 		if(last_x >= 5 and last_x <= 16 and last_y >=2 and last_y <=13):
 			if(board[last_y-2][last_x+2]==0 and board[last_y-1][last_x+1]==0):
-				if(board[last_y+1][last_x-1] + board[last_y+2][last_x-2] + board[last_y+3][last_x-3] == 2):
+				if(board[last_y+1][last_x-1] + board[last_y+2][last_x-2] + board[last_y+3][last_x-3] == 1):
 					if(board[last_y+4][last_x-4] == 0 and board[last_y+5][last_x-5] == 0):
 						for i in range(0, 4):
 							if board[last_y+i][last_x-i] == 0:
 								temp.append((last_x-i, last_y+i))
 								#board[last_y+i][last_x-i] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		if(last_x >= 4 and last_x <= 15 and last_y >=3 and last_y <=14):
 			if(board[last_y-3][last_x+3]==0 and board[last_y-2][last_x+2]==0):
-				if(board[last_y-1][last_x+1] + board[last_y+1][last_x-1] + board[last_y+2][last_x-2] == 2):
+				if(board[last_y-1][last_x+1] + board[last_y+1][last_x-1] + board[last_y+2][last_x-2] == 1):
 					if(board[last_y+3][last_x-3] == 0 and board[last_y+4][last_x-4] == 0):
 						for i in range(-1, 3):
 							if board[last_y+i][last_x-i] == 0:
 								temp.append((last_x-i, last_y+i))
 								#board[last_y+i][last_x-i] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		if(last_x >= 4 and last_x <= 14 and last_y >=4 and last_y <=14):
 			if(board[last_y-4][last_x+4]==0 and board[last_y-3][last_x+3]==0):
-				if(board[last_y-2][last_x+2] + board[last_y-1][last_x+1] + board[last_y+1][last_x-1] == 2):
+				if(board[last_y-2][last_x+2] + board[last_y-1][last_x+1] + board[last_y+1][last_x-1] == 1):
 					if(board[last_y+2][last_x-2] == 0 and board[last_y+3][last_x-3] == 0):
 						for i in range(-2, 2):
 							if board[last_y+i][last_x-i] == 0:
 								temp.append((last_x-i, last_y+i))
 								#board[last_y+i][last_x-i] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 		if(last_x >= 2 and last_x <= 13 and last_y >=5 and last_y <=16):
 			if(board[last_y-5][last_x+5]==0 and board[last_y-4][last_x+4]==0):
-				if(board[last_y-3][last_x+3] + board[last_y-2][last_x+2] + board[last_y-1][last_x+1] == 2):
+				if(board[last_y-3][last_x+3] + board[last_y-2][last_x+2] + board[last_y-1][last_x+1] == 1):
 					if(board[last_y+1][last_x-1] == 0 and board[last_y+2][last_x-2] == 0):
 						for i in range(-3, 1):
 							if board[last_y+i][last_x-i] == 0:
 								temp.append((last_x-i, last_y+i))
 								#board[last_y+i][last_x-i] = 1
-						candidate.add(temp)
+						candidate.add(tuple(temp))
 						temp.clear()
 	if len(candidate):
 		print("open2 candidate : " + str(candidate))
