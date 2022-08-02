@@ -52,6 +52,8 @@ def make_move(board):
 	left -= len(result)
 	# 4. 상대가 돌 1개를 사용하도록 공격하는 경우
 	result = algo4.algo4(left, 1, board)
+	if len(result) != 0:
+		print("algo4 : ", len(result))
 	final_result += result
 	left -= len(result)
 
@@ -67,6 +69,7 @@ def make_move(board):
 	left -= len(result)
  
 	last_ai_move = final_result
+	print(final_result)
 	return num_to_coor(final_result)
 
 def num_to_coor(lst):
