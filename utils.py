@@ -46,7 +46,10 @@ def make_move(board):
 	left -= len(result)
 	# 3. 상대가 돌 2개를 사용하도록 공격하는 경우
 	result = attack2.attack_2(board, last_ai_move, left)
-	
+	if len(result) != 0:
+		print("algo3 : ", len(result))
+	final_result += result
+	left -= len(result)
 	# 4. 상대가 돌 1개를 사용하도록 공격하는 경우
 	result = algo4.algo4(left, 1, board)
 	final_result += result

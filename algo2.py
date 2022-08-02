@@ -11,7 +11,6 @@ def algo2(stone, board, left):
 		left -= len(result)
   
 	while left > 0:
-		print("D")
 		result_tmp = find_5stones_close(stone, board, left)
 		if len(result_tmp) == 0:
 			result_tmp = find_4stones_close(stone, board, left)
