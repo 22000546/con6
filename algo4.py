@@ -139,7 +139,7 @@ def algo4(left, stone, board):
 def find_2stones_close(stone, board):
     global last_ai_move, last_away_move
 
-	lst = []
+    lst = []
 
     if stone == 1: # find ai stones 
         if last_ai_move == None:
@@ -165,12 +165,12 @@ def find_2stones_close(stone, board):
                 # print("RD res", RD)
     # else : # find away stones 
 
-	return lst
+    return lst
 
 def find_3stones_close(stone, board):
     global last_ai_move, last_away_move
 
-	lst = []
+    lst = []
 
     if stone == 1: # find ai stones 
         if last_ai_move == None:
@@ -197,4 +197,4 @@ def find_3stones_close(stone, board):
 
     # else : # find away stones 
 
-	return lst
+    return lst

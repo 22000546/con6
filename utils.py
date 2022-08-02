@@ -49,9 +49,9 @@ def make_move(board):
 	result = attack2.attack_2(board, last_ai_move, left)
 	
 	# 4. 상대가 돌 1개를 사용하도록 공격하는 경우
-    result = algo4.algo4(left, 1, board)
-    final_result += result
-    left -= len(result)
+	result = algo4.algo4(left, 1, board)
+	final_result += result
+	left -= len(result)
 
 	# 5. 방어하는 경우
 	# 6. 아무것도 할 게 없는 경우 (코너 -> 랜덤)
