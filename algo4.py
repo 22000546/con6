@@ -62,7 +62,7 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
         elif find == 2:
             items = []
             [items.append((x+j, y+j)) for (x,y) in RD for j in range(0, num) if board[y+j][x+j] == 0]
-            res.extend(list(combinations(items, 2)))
+            res.append(list(combinations(items, 2)))
 
     return res
 
@@ -94,7 +94,7 @@ def diagonal_RU_search(board, x, y, num, find): # left bottom to right up
         elif find == 2:
             items = []
             [items.append((x+j, y-j)) for (x,y) in RU for j in range(0, num) if board[y-j][x+j] == 0]
-            res.extend(list(combinations(items, 2)))
+            res.append(list(combinations(items, 2)))
     return res
 
 def horizontal_search(board, x, y, num, find):  # left to right 
@@ -124,7 +124,7 @@ def horizontal_search(board, x, y, num, find):  # left to right
         elif find == 2:
             items = []
             [items.append((x+j, y)) for (x,y) in hori for j in range(0, num) if board[y][x+j] == 0]
-            res.extend(list(combinations(items, 2)))
+            res.append(list(combinations(items, 2)))
     return res
 
 def vertical_search(board, x, y, num, find): # top to bottom 
@@ -154,25 +154,38 @@ def vertical_search(board, x, y, num, find): # top to bottom
         elif find == 2:
             items = []
             [items.append((x, y+j)) for (x,y) in ver for j in range(0, num) if board[y+j][x] == 0]
-            res.extend(list(combinations(items, 2)))
+            res.append(list(combinations(items, 2)))
     return res
 
 
 def algo4(left, stone, board):
-    # find 3stones close 
+    
     ret = []
 
-    prev_set = []
+    # find 3stones close 
     while left > 0 :
         res = find_3stones_close(stone, board)
         if len(res) == 0:
-            return ret 
-        print("res len", len(res))
+            break
         rand = random.randint(0, len(res)-1)
         x,y = res[rand]
         board[y][x] = 1
         ret.append((x,y))
         left -= 1
+    
+    # find 2stones close 
+    if left == 2:
+        res = find_2stones_close(stone, board)
+        if len(res) == 0:
+            return ret 
+        print("find 2stones close")
+        select_set = random.randint(0, len(res)-1)
+        rand = random.randint(0, len(res[select_set])-1)
+        (x,y),(x1,y1) = res[select_set][rand]
+        board[y][x] = 1
+        board[y1][x1] = 1
+        ret.append((x,y))
+        ret.append((x1,y1))
     return ret 
 
 def find_3stones_close(stone, board):
