@@ -3,9 +3,8 @@ import algo1
 import utils
 
 def algo2(stone, board, left):
-	if left == 2:
-		result = algo1.find_5stones_open(stone, board, left)
-		left -= len(result)
+	result = algo1.find_5stones_open(stone, board, left)
+	left -= len(result)
 	if left == 2:
 		result = algo1.find_4stones_open(stone, board, left)
 		left -= len(result)
