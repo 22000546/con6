@@ -24,8 +24,9 @@ def attack_2(board, my_last_points, left):
 	elif left == 2:
 		points = open2(board, my_last_points)
 		# 2개로 공격할 수 있으면 그냥 그 points들 바로 return
-		if points != None:
-			return points
+		if len(points) > 0:
+        	#print("open2 candidate : " + str(candidate))
+			return random.choice(list(points))
 		# 2개로도 공격 못하면 그냥 빈거 return
 		else:
 			return to_put
@@ -328,8 +329,5 @@ def open2(board, my_last_points):
 								#board[last_y+i][last_x-i] = 1
 						candidate.add(tuple(temp))
 						temp.clear()
-	if len(candidate):
-		print("open2 candidate : " + str(candidate))
-		return random.choice(list(candidate))
-	else:
-		return None
+      
+	return candidate

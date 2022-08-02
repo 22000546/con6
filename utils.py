@@ -3,6 +3,7 @@
 '''
 from regex import B
 from CONNSIX import connsix
+import first
 import algo1
 import algo2
 import algo7
@@ -31,6 +32,12 @@ def get_away_move():
 def make_move(board):
 	global last_ai_move, last_away_move
 	left = 2
+	
+	if last_ai_move == None:
+		final_result = first.find_first(board)
+		last_ai_move = final_result
+		print(final_result)
+		return num_to_coor(final_result)
  
 	# 1. 내가 끝낼 수 있는 경우
 	result = algo1.algo1(1, board, left)
