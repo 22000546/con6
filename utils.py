@@ -12,10 +12,12 @@ import attack2
 
 last_ai_move = None #[(x,y)] list
 last_away_move = None
+ai_move_log = None
 
 def set_ai_move(ai_move):
-	global last_ai_move
+	global last_ai_move, ai_move_log
 	last_ai_move = ai_move
+	ai_move_log = last_ai_move
 
 def set_away_move(away_move):
 	global last_away_move
@@ -27,16 +29,22 @@ def get_ai_move():
 
 def get_away_move():
 	global last_away_move
-	return last_away_move    
+	return last_away_move
+
+def get_ai_move_log():
+    global ai_move_log
+    return ai_move_log    
 
 def make_move(board):
-	global last_ai_move, last_away_move
+	global last_ai_move, last_away_move, ai_move_log
 	left = 2
+ 
+	print(ai_move_log)
 	
 	if last_ai_move == None:
 		final_result = first.find_first(board)
+		ai_move_log = final_result
 		last_ai_move = final_result
-		print(final_result)
 		return num_to_coor(final_result)
  
 	# 1. 내가 끝낼 수 있는 경우
@@ -75,6 +83,7 @@ def make_move(board):
 	final_result += result
 	left -= len(result)
  
+	ai_move_log += final_result
 	last_ai_move = final_result
 	print(final_result)
 	return num_to_coor(final_result)
