@@ -1,6 +1,14 @@
 import random
 import utils
 
+def algo1(stone, board, left):
+	if left == 2:
+		result = find_5stones_open(stone, board, left)
+	if len(result) == 0:
+		result = find_4stones_open(stone, board, left)
+	
+	return result
+
 def find_5stones_open(stone, board, left):
 	last_ai_move = utils.get_ai_move()
 	last_away_move = utils.get_away_move()
@@ -83,9 +91,6 @@ def find_4stones_open(stone, board, left):
 		stone_list = last_ai_move
 	else:
 		stone_list = last_away_move
-  
-	if stone_list is None:
-		return None
 
 	for (x, y) in stone_list:
   		# 양옆

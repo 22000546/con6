@@ -7,6 +7,7 @@ def find_corner(board, left):
     while left > 0:
         if board[j][i] == 0:
             lst.append((i, j))
+            board[j][i] = 1
             left -= 1
         j -= 1
             
