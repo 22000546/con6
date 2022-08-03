@@ -67,7 +67,8 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
             items = set()
             [items.add((x+j, y+j)) for (x,y) in RD for j in range(0, num) if board[y+j][x+j] == 0]
             res.append(list(combinations(list(items), 2)))
-
+            for i in range(0, len(res[0])):
+                res[0][i] = list(res[0][i])
     return res
 
 def diagonal_RU_search(board, x, y, num, find): # left bottom to right up 
@@ -103,6 +104,8 @@ def diagonal_RU_search(board, x, y, num, find): # left bottom to right up
             items = set()
             [items.add((x+j, y-j)) for (x,y) in RU for j in range(0, num) if board[y-j][x+j] == 0]
             res.append(list(combinations(list(items), 2)))
+            for i in range(0, len(res[0])):
+                res[0][i] = list(res[0][i])
     return res
 
 def horizontal_search(board, x, y, num, find):  # left to right 
@@ -137,6 +140,8 @@ def horizontal_search(board, x, y, num, find):  # left to right
             items = set()
             [items.add((x+j, y)) for (x,y) in hori for j in range(0, num) if board[y][x+j] == 0]
             res.append(list(combinations(list(items), 2)))
+            for i in range(0, len(res[0])):
+                res[0][i] = list(res[0][i])
     return res
 
 def vertical_search(board, x, y, num, find): # top to bottom 
@@ -171,6 +176,8 @@ def vertical_search(board, x, y, num, find): # top to bottom
             items = set()
             [items.add((x, y+j)) for (x,y) in ver for j in range(0, num) if board[y+j][x] == 0]
             res.append(list(combinations(list(items), 2)))
+            for i in range(0, len(res[0])):
+                res[0][i] = list(res[0][i])
     return res
 
 
