@@ -27,6 +27,15 @@ def algo2(stone, board, left):
 			break
 		else:
 			print("semi open")
+   
+	while left > 0:
+		result_tmp = find_4stones_semi_close(stone, board, left) # returns one stone
+		result += result_tmp
+		left -= len(result_tmp)
+		if len(result_tmp) == 0:
+			break
+		else:
+			print("semi close")
 
 	while left > 0:
 		result_tmp = find_4stones_close(stone, board, left) # returns one stone
@@ -209,6 +218,81 @@ def find_4stones_semi_open(stone, board, left):
                 elif x+2+i > 18 or y-2-i > 18 or board[y-2-i][x+2+i] != 0: # 오른쪽 막힘
                     lst.append([(x-4+i, y+4-i)])
         
+    if len(lst) != 0:
+        select = random.randint(0, len(lst)-1)
+        lst = lst[select]
+        board[lst[0][1]][lst[0][0]] = 1
+    
+    return lst
+
+def find_4stones_semi_close(stone, board, left):
+    ai_move_log = utils.get_ai_move_log()
+    away_move_log = utils.get_away_move_log()
+    lst = []
+    
+    if left == 0:
+        return lst
+    
+    if stone == 1:
+        stone_list = ai_move_log
+    else:
+        stone_list = away_move_log
+        
+    for (x, y) in stone_list:
+        for i in range(5):
+            # 양옆
+            if x-5+i < 0 or x+1+i > 18:
+                continue
+            if board[y][x-5+i] == 0 and board[y][x+1+i] == 0:
+                # _XX_XX_
+                if board[y][x-4+i] == stone and board[y][x-3+i] == stone and board[y][x-2+i] == 0 and board[y][x-1+i] == stone and board[y][x+i] == stone:
+                    lst.append([(x-2+i, y)])
+				# _X_XXX_
+                elif board[y][x-4+i] == stone and board[y][x-3+i] == 0 and board[y][x-2+i] == stone and board[y][x-1+i] == stone and board[y][x+i] == stone:
+                    lst.append([(x-3+i, y)])
+                # _XXX_X_
+                elif board[y][x-4+i] == stone and board[y][x-3+i] == stone and board[y][x-2+i] == stone and board[y][x-1+i] == 0 and board[y][x+i] == stone:
+                    lst.append([(x-1+i, y)])
+            # 위아래
+            if y-5+i < 0 or y+1+i > 18:
+                continue
+            if board[y-5+i][x] == 0 and board[y+1+i][x] == 0:
+                # _XX_XX_
+                if board[y-4+i][x] == stone and board[y-3+i][x] == stone and board[y-2+i][x] == 0 and board[y-1+i][x] == stone and board[y+i][x] == stone:
+                    lst.append([(x, y-2+i)])
+				# _X_XXX_
+                elif board[y-4+i][x] == stone and board[y-3+i][x] == 0 and board[y-2+i][x] == stone and board[y-1+i][x] == stone and board[y+i][x] == stone:
+                    lst.append([(x, y-3+i)])
+                # _XXX_X_
+                elif board[y-4+i][x] == stone and board[y-3+i][x] == stone and board[y-2+i][x] == stone and board[y-1+i][x] == 0 and board[y+i][x] == stone:
+                    lst.append([(x, y-1+i)])
+            # 왼쪽 위 오른쪽 아래 대각선
+            if x-5+i < 0 or x+1+i > 18 or y-5+i < 0 or y+1+i > 18:
+                continue
+            if board[y-5+i][x-5+i] == 0 and board[y+1+i][x+1+i] == 0:
+                # _XX_XX_
+                if board[y-4+i][x-4+i] == stone and board[y-3+i][x-3+i] == stone and board[y-2+i][x-2+i] == 0 and board[y-1+i][x-1+i] == stone and board[y+i][x+i] == stone:
+                    lst.append([(x-2+i, y-2+i)])
+				# _X_XXX_
+                elif board[y-4+i][x-4+i] == stone and board[y-3+i][x-3+i] == 0 and board[y-2+i][x-2+i] == stone and board[y-1+i][x-1+i] == stone and board[y+i][x+i] == stone:
+                    lst.append([(x-3+i, y-3+i)])
+                # _XXX_X_
+                elif board[y-4+i][x-4+i] == stone and board[y-3+i][x-3+i] == stone and board[y-2+i][x-2+i] == stone and board[y-1+i][x-1+i] == 0 and board[y+i][x+i] == stone:
+                    lst.append([(x-1+i, y-1+i)])
+            # 오른쪽 위 왼쪽 아래 대각선
+            if x-5+i < 0 or x+1+i > 18 or y+5-i > 18 or y-1-i < 0:
+                continue
+            if board[y+5-i][x-5+i] == 0 and board[y-1-i][x+1+i] == 0:
+                # _XX_XX_
+                if board[y+4-i][x-4+i] == stone and board[y+3-i][x-3+i] == stone and board[y+2-i][x-2+i] == 0 and board[y+1-i][x-1+i] == stone and board[y-i][x+i] == stone:
+                    lst.append([(x-2+i, y+2-i)])
+				# _X_XXX_
+                elif board[y+4-i][x-4+i] == stone and board[y+3-i][x-3+i] == 0 and board[y+2-i][x-2+i] == stone and board[y+1-i][x-1+i] == stone and board[y-i][x+i] == stone:
+                    lst.append([(x-3+i, y+3-i)])
+                # _XXX_X_
+                elif board[y+4-i][x-4+i] == stone and board[y+3-i][x-3+i] == stone and board[y+2-i][x-2+i] == stone and board[y+1-i][x-1+i] == 0 and board[y-i][x+i] == stone:
+                    lst.append([(x-1+i, y+1-i)])
+    
     if len(lst) != 0:
         select = random.randint(0, len(lst)-1)
         lst = lst[select]
