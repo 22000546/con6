@@ -51,6 +51,11 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
         if sum == 4 :
             i -= 4
         elif sum == find :
+            check = 0
+            for j in range(0, num):
+                check += board[y-i-1+j][x-i-1+j]
+            if check == 4:
+                i-=3
             RD.append((x-i,y-i))
 
     if len(RD) > 0:
@@ -88,6 +93,11 @@ def diagonal_RU_search(board, x, y, num, find): # left bottom to right up
         if sum == 4 :
             i -= 4
         elif sum == find:
+            check = 0
+            for j in range(0, num):
+                check += board[y+i+1-j][x-i-1+j]
+            if check == 4:
+                i-=3
             RU.append((x-i,y+i))
     
     if len(RU) > 0:
@@ -124,6 +134,11 @@ def horizontal_search(board, x, y, num, find):  # left to right
         if sum == 4 :
             i -= 4
         elif sum == find:
+            check = 0
+            for j in range(0, num):
+                check += board[y][x-i-1+j]
+            if check == 4:
+                i-=3
             hori.append((x-i,y))
         
     if len(hori) > 0 :
@@ -160,6 +175,11 @@ def vertical_search(board, x, y, num, find): # top to bottom
         if sum == 4 :
             i -= 4
         elif sum == find:
+            check = 0
+            for j in range(0, num):
+                check += board[y-i-1+j][x]
+            if check == 4:
+                i-=3
             ver.append((x,y-i))
     
     if len(ver) >0 :
