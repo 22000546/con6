@@ -1,7 +1,6 @@
 '''
 
 '''
-from regex import B
 from CONNSIX import connsix
 import first
 import algo1
