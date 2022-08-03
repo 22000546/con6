@@ -22,7 +22,7 @@ def set_ai_move(ai_move):
 def set_away_move(away_move):
 	global last_away_move, away_move_log
 	last_away_move = coor_to_num(away_move)
-	away_move_log += last_away_move
+	away_move_log = last_away_move + away_move_log
  
 def get_ai_move():
 	global last_ai_move
@@ -43,7 +43,7 @@ def get_away_move_log():
 def make_move(board):
 	global last_ai_move, last_away_move, ai_move_log
 	left = 2
- 	
+  
 	if last_ai_move == None:
 		final_result = first.find_first(board)
 		ai_move_log = final_result
@@ -74,19 +74,15 @@ def make_move(board):
 		print("algo4 : ", len(result))
 	final_result += result
 	left -= len(result)
-
 	# 5. 방어하는 경우
-	# 6. 아무것도 할 게 없는 경우 (코너 -> 랜덤)
-	# result = algo7.find_corner(board, left)
-	# final_result += result
-	# left -= len(result)
-	result = algo7.find_random(1, board, left)
+	# 6. 아무것도 할 게 없는 경우
+	result = algo7.algo7(board, left)
 	if(len(result) != 0):
 		print("algo7 : ", len(result))
 	final_result += result
 	left -= len(result)
  
-	ai_move_log += final_result
+	ai_move_log = final_result + ai_move_log
 	# ai_move_log = last_ai_move + final_result
 	last_ai_move = final_result
 	print(final_result)
