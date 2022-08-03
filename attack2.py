@@ -37,6 +37,7 @@ def attack_2(board, my_last_points, left):
 
 def open3(stone, board, my_last_points):
 	candidate = set()
+	temp = []
 	for coor in my_last_points:
 		(last_x, last_y) = coor
 		# -방향
