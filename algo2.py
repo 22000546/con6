@@ -1,4 +1,3 @@
-import random
 import utils
 import algo1
 
@@ -92,8 +91,7 @@ def find_5stones_open(stone, board, left):
 					lst.append([(x-5+i, y+5-i), (x+1+i, y-1-i)])
     
 	if len(lst) != 0:
-		select = random.randint(0, len(lst)-1)
-		lst = lst[select]
+		lst = utils.get_max_open_points(1, board, lst)
   			
 	return lst
 
@@ -161,9 +159,7 @@ def find_4stones_open(stone, board, left):
 						lst.append([(x-4+i, y+4-i), (x+2+i, y-2-i)])
     
 	if len(lst) != 0:
-		select = random.randint(0, len(lst)-1)
-		lst = lst[select]
-		board[lst[0][1]][lst[0][0]] = 1
+		lst = utils.get_max_open_points(1, board, lst)
 	
 	return lst
 
@@ -187,40 +183,39 @@ def find_4stones_semi_open(stone, board, left):
                 continue
             if board[y][i] == 0 and board[y][i+1] == stone and board[y][i+2] == stone and board[y][i+3] == stone and board[y][i+4] == stone and board[y][i+5] == 0:
                 if i-1 < 0 or board[y][i-1] != 0: # 왼쪽 막힘
-                    lst.append([(i+5, y)])
+                    lst.append((i+5, y))
                 elif i+6 > 18 or board[y][i+6] != 0: # 오른쪽 막힘
-                    lst.append([(i, y)])
+                    lst.append((i, y))
         # 위아래
         for i in range(y-4, y):
             if i < 0 or i > 13:
                 continue
             if board[i][x] == 0 and board[i+1][x] == stone and board[i+2][x] == stone and board[i+3][x] == stone and board[i+4][x] == stone and board[i+5][x] == 0:
                 if i-1 < 0 or board[i-1][x] != 0: # 왼쪽 막힘
-                    lst.append([(x, i+5)])
+                    lst.append((x, i+5))
                 elif i+6 > 18 or board[i+6][x] != 0: # 오른쪽 막힘
-                    lst.append([(x, i)])
+                    lst.append((x, i))
         # 왼쪽 위 오른쪽 아래 대각선
         for i in range(4):
             if x-4+i < 0 or y-4+i < 0 or x+1+i > 18 or y+1+i > 18:
                 continue
             if board[y-4+i][x-4+i] == 0 and board[y-3+i][x-3+i] == stone and board[y-2+i][x-2+i] == stone and board[y-1+i][x-1+i] == stone and board[y+i][x+i] == stone and board[y+1+i][x+1+i] == 0:
                 if x-5+i < 0 or y-5+i < 0 or board[y-5+i][x-5+i] != 0: # 왼쪽 막힘
-                    lst.append([(x+1+i, y+1+i)])
+                    lst.append((x+1+i, y+1+i))
                 elif x+2+i > 18 or y+2+i > 18 or board[y+2+i][x+2+i] != 0: # 오른쪽 막힘
-                    lst.append([(x-4+i, y-4+i)])
+                    lst.append((x-4+i, y-4+i))
         # 오른쪽 위 왼쪽 아래 대각선
         for i in range(4):
             if x-4+i < 0 or y+4-i > 18 or x+1+i > 18 or y-1-i < 0:
                 continue
             if board[y+4-i][x-4+i] == 0 and board[y+3-i][x-3+i] == stone and board[y+2-i][x-2+i] == stone and board[y+1-i][x-1+i] == stone and board[y-i][x+i] == stone and board[y-1-i][x+1+i] == 0:
                 if x-5+i < 0 or y+5-i < 0 or board[y+5-i][x-5+i] != 0: # 왼쪽 막힘
-                    lst.append([(x+1+i, y-1-i)])
+                    lst.append((x+1+i, y-1-i))
                 elif x+2+i > 18 or y-2-i > 18 or board[y-2-i][x+2+i] != 0: # 오른쪽 막힘
-                    lst.append([(x-4+i, y+4-i)])
+                    lst.append((x-4+i, y+4-i))
         
     if len(lst) != 0:
-        select = random.randint(0, len(lst)-1)
-        lst = lst[select]
+        lst = utils.get_max_open_point(1, board, lst)
         board[lst[0][1]][lst[0][0]] = 1
     
     return lst
@@ -246,56 +241,55 @@ def find_4stones_semi_close(stone, board, left):
             if board[y][x-5+i] == 0 and board[y][x+1+i] == 0:
                 # _XX_XX_
                 if board[y][x-4+i] == stone and board[y][x-3+i] == stone and board[y][x-2+i] == 0 and board[y][x-1+i] == stone and board[y][x+i] == stone:
-                    lst.append([(x-2+i, y)])
+                    lst.append((x-2+i, y))
 				# _X_XXX_
                 elif board[y][x-4+i] == stone and board[y][x-3+i] == 0 and board[y][x-2+i] == stone and board[y][x-1+i] == stone and board[y][x+i] == stone:
-                    lst.append([(x-3+i, y)])
+                    lst.append((x-3+i, y))
                 # _XXX_X_
                 elif board[y][x-4+i] == stone and board[y][x-3+i] == stone and board[y][x-2+i] == stone and board[y][x-1+i] == 0 and board[y][x+i] == stone:
-                    lst.append([(x-1+i, y)])
+                    lst.append((x-1+i, y))
             # 위아래
             if y-5+i < 0 or y+1+i > 18:
                 continue
             if board[y-5+i][x] == 0 and board[y+1+i][x] == 0:
                 # _XX_XX_
                 if board[y-4+i][x] == stone and board[y-3+i][x] == stone and board[y-2+i][x] == 0 and board[y-1+i][x] == stone and board[y+i][x] == stone:
-                    lst.append([(x, y-2+i)])
+                    lst.append((x, y-2+i))
 				# _X_XXX_
                 elif board[y-4+i][x] == stone and board[y-3+i][x] == 0 and board[y-2+i][x] == stone and board[y-1+i][x] == stone and board[y+i][x] == stone:
-                    lst.append([(x, y-3+i)])
+                    lst.append((x, y-3+i))
                 # _XXX_X_
                 elif board[y-4+i][x] == stone and board[y-3+i][x] == stone and board[y-2+i][x] == stone and board[y-1+i][x] == 0 and board[y+i][x] == stone:
-                    lst.append([(x, y-1+i)])
+                    lst.append((x, y-1+i))
             # 왼쪽 위 오른쪽 아래 대각선
             if x-5+i < 0 or x+1+i > 18 or y-5+i < 0 or y+1+i > 18:
                 continue
             if board[y-5+i][x-5+i] == 0 and board[y+1+i][x+1+i] == 0:
                 # _XX_XX_
                 if board[y-4+i][x-4+i] == stone and board[y-3+i][x-3+i] == stone and board[y-2+i][x-2+i] == 0 and board[y-1+i][x-1+i] == stone and board[y+i][x+i] == stone:
-                    lst.append([(x-2+i, y-2+i)])
+                    lst.append((x-2+i, y-2+i))
 				# _X_XXX_
                 elif board[y-4+i][x-4+i] == stone and board[y-3+i][x-3+i] == 0 and board[y-2+i][x-2+i] == stone and board[y-1+i][x-1+i] == stone and board[y+i][x+i] == stone:
-                    lst.append([(x-3+i, y-3+i)])
+                    lst.append((x-3+i, y-3+i))
                 # _XXX_X_
                 elif board[y-4+i][x-4+i] == stone and board[y-3+i][x-3+i] == stone and board[y-2+i][x-2+i] == stone and board[y-1+i][x-1+i] == 0 and board[y+i][x+i] == stone:
-                    lst.append([(x-1+i, y-1+i)])
+                    lst.append((x-1+i, y-1+i))
             # 오른쪽 위 왼쪽 아래 대각선
             if x-5+i < 0 or x+1+i > 18 or y+5-i > 18 or y-1-i < 0:
                 continue
             if board[y+5-i][x-5+i] == 0 and board[y-1-i][x+1+i] == 0:
                 # _XX_XX_
                 if board[y+4-i][x-4+i] == stone and board[y+3-i][x-3+i] == stone and board[y+2-i][x-2+i] == 0 and board[y+1-i][x-1+i] == stone and board[y-i][x+i] == stone:
-                    lst.append([(x-2+i, y+2-i)])
+                    lst.append((x-2+i, y+2-i))
 				# _X_XXX_
                 elif board[y+4-i][x-4+i] == stone and board[y+3-i][x-3+i] == 0 and board[y+2-i][x-2+i] == stone and board[y+1-i][x-1+i] == stone and board[y-i][x+i] == stone:
-                    lst.append([(x-3+i, y+3-i)])
+                    lst.append((x-3+i, y+3-i))
                 # _XXX_X_
                 elif board[y+4-i][x-4+i] == stone and board[y+3-i][x-3+i] == stone and board[y+2-i][x-2+i] == stone and board[y+1-i][x-1+i] == 0 and board[y-i][x+i] == stone:
-                    lst.append([(x-1+i, y+1-i)])
+                    lst.append((x-1+i, y+1-i))
     
     if len(lst) != 0:
-        select = random.randint(0, len(lst)-1)
-        lst = lst[select]
+        lst = utils.get_max_open_point(1, board, lst)
         board[lst[0][1]][lst[0][0]] = 1
     
     return lst
@@ -322,7 +316,7 @@ def find_4stones_close(stone, board, left):
             if sum == 4 * stone:
                 for j in range(6):
                     if board[y][i+j] == 0:
-                        lst.append([(i+j, y)])          
+                        lst.append((i+j, y))          
         # 위아래
         for i in range(y-5, y+1):
             if i < 0 or i > 13:
@@ -331,7 +325,7 @@ def find_4stones_close(stone, board, left):
             if sum == 4 * stone:
                 for j in range(6):
                     if board[i+j][x] == 0:
-                        lst.append([(x, i+j)])
+                        lst.append((x, i+j))
         # 왼쪽 위 오른쪽 아래 대각선
         for i in range(6):
             if x-5+i < 0 or y-5+i < 0 or x+i > 18 or y+i > 18:
@@ -340,7 +334,7 @@ def find_4stones_close(stone, board, left):
             if sum == 4 * stone:
                 for j in range(6):
                     if board[y-j+i][x-j+i] == 0:
-                        lst.append([(x-j+i, y-j+i)])
+                        lst.append((x-j+i, y-j+i))
         # 오른쪽 위 왼쪽 아래 대각선
         for i in range(6):
             if x-5+i < 0 or y+5-i > 18 or x+i > 18 or y-i < 0:
@@ -349,11 +343,10 @@ def find_4stones_close(stone, board, left):
             if sum == 4 * stone:
                 for j in range(6):
                     if board[y+j-i][x-j+i] == 0:
-                        lst.append([(x-j+i, y+j-i)])
+                        lst.append((x-j+i, y+j-i))
        
     if len(lst) != 0:
-        select = random.randint(0, len(lst)-1)
-        lst = lst[select]
+        lst = utils.get_max_open_point(1, board, lst)
         board[lst[0][1]][lst[0][0]] = 1
         
     return lst

@@ -1,4 +1,3 @@
-import random
 import utils
 import attack2
 
@@ -27,27 +26,18 @@ def find_defense_and_attack(board, left):
     if len(intersect_points) == 0:
         if len(attack_points) == 0:
             lst = list(defense_points)
-            print("defense")
+            if len(lst) == 0:
+                return lst
+            else:
+                print("defense")
         else:
-            select = random.randint(0, len(attack_points)-1)
             lst = list(attack_points)
-            lst = ([lst[select]])
-            print(lst)
-            board[lst[0][1]][lst[0][0]] = 1
             print("attack")
+        lst = utils.get_max_open_point(1, board, lst)
+        board[lst[0][1]][lst[0][0]] = 1
         return lst
     
-    max_open = -1
-    for (x, y) in intersect_points:
-        point = [(x, y)]
-        board[y][x] = 1
-        tmp = attack2.open2(1, board, ai_move_log)
-        if len(tmp) > max_open:
-            max_open = len(tmp)
-            max_point = point
-        board[y][x] = 0
-    
-    lst = list(max_point)
+    lst = utils.get_max_open_point(1, board, list(intersect_points))
     board[lst[0][1]][lst[0][0]] = 1
     print("attack + defense")
     

@@ -1,4 +1,3 @@
-import random
 import utils
 
 def algo1(stone, board, left):
@@ -74,9 +73,9 @@ def find_5stones_close(stone, board, left):
                         lst.append(tmp_lst)
        
     if len(lst) != 0:
-        select = random.randint(0, len(lst)-1)
-        lst = lst[select]
+        lst = utils.get_max_open_point(1, board, lst)
         board[lst[0][1]][lst[0][0]] = 1
+    
     return lst
 
 def find_4stones_close(stone, board, left):
@@ -143,7 +142,6 @@ def find_4stones_close(stone, board, left):
                         lst.append(tmp_lst)
        
     if len(lst) != 0:
-        select = random.randint(0, len(lst)-1)
-        lst = lst[select]
+        lst = utils.get_max_open_points(1, board, lst)
     
     return lst

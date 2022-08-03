@@ -64,7 +64,7 @@ def make_move(board):
 	final_result += result
 	left -= len(result)
 	# 3. 상대가 돌 2개를 사용하도록 공격하는 경우
-	result = attack2.attack_2(board, last_ai_move, left)
+	result = attack2.attack_2(board, ai_move_log, left)
 	if len(result) != 0:
 		print("algo3 : ", len(result))
 	final_result += result
@@ -147,6 +147,8 @@ def get_board(ai_home):
     return board
 
 def get_max_open_point(stone, board, points):
+    # points = [(x,y), (x,y), ...]
+    # print("point", points)
     if stone == 1:
         stone_list = ai_move_log
     else:
@@ -163,3 +165,25 @@ def get_max_open_point(stone, board, points):
         board[y][x] = 0
         
     return max_point
+
+def get_max_open_points(stone, board, points):
+    # points = [ [(x,y), (x,y)], [(x,y), (x,y)], ...]
+    # print("point", points)
+    if stone == 1:
+        stone_list = ai_move_log
+    else:
+        stone_list = away_move_log
+        
+    max_open = -1
+    for point in points:
+        [(x1, y1), (x2, y2)] = point
+        board[y1][x1] = 1
+        board[y2][x2] = 1
+        tmp = attack2.open2(1, board, stone_list)
+        if len(tmp) > max_open:
+            max_open = len(tmp)
+            max_points = point
+        board[y1][x1] = 0
+        board[y2][x2] = 0
+        
+    return max_points
