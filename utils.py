@@ -91,7 +91,6 @@ def make_move(board):
 	ai_move_log = final_result + ai_move_log
 	# ai_move_log = last_ai_move + final_result
 	last_ai_move = final_result
-	print(final_result)
 	return num_to_coor(final_result)
 
 def num_to_coor(lst):
@@ -146,3 +145,21 @@ def get_board(ai_home):
             else:    
                 board[y][x] = 10
     return board
+
+def get_max_open_point(stone, board, points):
+    if stone == 1:
+        stone_list = ai_move_log
+    else:
+        stone_list = away_move_log
+        
+    max_open = -1
+    for (x, y) in points:
+        point = [(x, y)]
+        board[y][x] = 1
+        tmp = attack2.open2(1, board, stone_list)
+        if len(tmp) > max_open:
+            max_open = len(tmp)
+            max_point = point
+        board[y][x] = 0
+        
+    return max_point
