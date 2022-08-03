@@ -11,8 +11,8 @@ def attack_2(board, my_last_points, left):
 		# 있으면 거기 놓기로 하고
 		if len(points) > 0:
 			points = utils.get_max_open_point(1, board, list(points))
-			to_put.append(points)
-			board[points[1]][points[0]] = 1
+			to_put.extend(points)
+			board[points[0][1]][points[0][0]] = 1
 			left = left - 1
 	# 남은 돌이 1개면 한번 더 찾아보기
 	if left == 1:
@@ -20,7 +20,7 @@ def attack_2(board, my_last_points, left):
 		# 남은 돌로 또 만들 수 있으면 그 점까지 넣고 총 2개 return, 없으면 그냥 1개만
 		if len(points) > 0:
 			points = utils.get_max_open_point(1, board, list(points))
-			to_put.append(points)
+			to_put.extend(points)
 		return to_put
 	#남은 돌이 2개면 1개로 못했던거니까 2개로 가능한지 알아보기
 	elif left == 2:

@@ -189,7 +189,7 @@ def algo4(left, stone, board):
         if len(res) == 0:
             break
         res = utils.get_max_open_point(1, board, res)
-        x,y = res
+        [(x,y)] = res
         board[y][x] = 1
         ret.append((x,y))
         left -= 1
