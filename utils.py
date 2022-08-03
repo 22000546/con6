@@ -5,6 +5,7 @@ from CONNSIX import connsix
 import first
 import algo1
 import algo2
+import algo6
 import algo7
 import algo4
 import attack2
@@ -75,6 +76,11 @@ def make_move(board):
 	final_result += result
 	left -= len(result)
 	# 5. 방어하는 경우
+	result = algo6.algo6(board, left)
+	if len(result) != 0:
+		print("algo6 : ", len(result))
+	final_result += result
+	left -= len(result)
 	# 6. 아무것도 할 게 없는 경우
 	result = algo7.algo7(board, left)
 	if(len(result) != 0):
