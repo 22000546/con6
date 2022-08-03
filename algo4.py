@@ -49,8 +49,11 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
         else:
             sum = sum - board[y-i-1][x-i-1] + board[y-i+(num-1)][x-i+(num-1)]
         
-        if sum == find :
+        if sum == 4 :
+            i -= 4
+        elif sum == find :
             RD.append((x-i,y-i))
+            for 
 
     if len(RD) > 0:
         print("RD", RD, "x,y", x, y)
@@ -58,7 +61,8 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
     res = []
     if len(RD) > 0:
         if find == 3:
-            [res.append((x+j, y+j)) for (x,y) in RD for j in range(0, num) if board[y+j][x+j] == 0 and check_5stones(board, x+j, y+j) == 0]
+            # [res.append((x+j, y+j)) for (x,y) in RD for j in range(0, num) if board[y+j][x+j] == 0 and check_5stones(board, x+j, y+j) == 0]
+            [res.append((x+j, y+j)) for (x,y) in RD for j in range(0, num) if board[y+j][x+j] == 0]
         elif find == 2:
             items = set()
             [items.add((x+j, y+j)) for (x,y) in RD for j in range(0, num) if board[y+j][x+j] == 0]
@@ -81,7 +85,10 @@ def diagonal_RU_search(board, x, y, num, find): # left bottom to right up
                 sum += board[y+i-j][x-i+j]
         else:
             sum = sum - board[y+i+1][x-i-1] + board[y+i-(num-1)][x-i+(num-1)]
-        if sum == find:
+        
+        if sum == 4 :
+            i -= 4
+        elif sum == find:
             RU.append((x-i,y+i))
     
     if len(RU) > 0:
@@ -90,7 +97,8 @@ def diagonal_RU_search(board, x, y, num, find): # left bottom to right up
     res = []
     if len(RU) > 0:
         if find == 3: 
-            [res.append((x+j, y-j)) for (x,y) in RU for j in range(0, num) if board[y-j][x+j] == 0 and check_5stones(board, x+j, y-j) == 0]
+            # [res.append((x+j, y-j)) for (x,y) in RU for j in range(0, num) if board[y-j][x+j] == 0 and check_5stones(board, x+j, y-j) == 0]
+            [res.append((x+j, y-j)) for (x,y) in RU for j in range(0, num) if board[y-j][x+j] == 0]
         elif find == 2:
             items = set()
             [items.add((x+j, y-j)) for (x,y) in RU for j in range(0, num) if board[y-j][x+j] == 0]
@@ -111,7 +119,10 @@ def horizontal_search(board, x, y, num, find):  # left to right
                 sum += board[y][x-i+j]
         else:
             sum = sum - board[y][x-i-1] + board[y][x-i+(num-1)]
-        if sum == find:
+        
+        if sum == 4 :
+            i -= 4
+        elif sum == find:
             hori.append((x-i,y))
         
     if len(hori) > 0 :
@@ -120,7 +131,8 @@ def horizontal_search(board, x, y, num, find):  # left to right
     res = []
     if len(hori) > 0:
         if find == 3:
-            [res.append((x+j, y)) for (x,y) in hori for j in range(0, num) if board[y][x+j] == 0 and  check_5stones(board, x+j, y) == 0]
+            # [res.append((x+j, y)) for (x,y) in hori for j in range(0, num) if board[y][x+j] == 0 and  check_5stones(board, x+j, y) == 0]
+            [res.append((x+j, y)) for (x,y) in hori for j in range(0, num) if board[y][x+j] == 0]
         elif find == 2:
             items = set()
             [items.add((x+j, y)) for (x,y) in hori for j in range(0, num) if board[y][x+j] == 0]
@@ -141,7 +153,10 @@ def vertical_search(board, x, y, num, find): # top to bottom
                 sum += board[y-i+j][x]
         else:
             sum = sum - board[y-i-1][x] + board[y-i+(num-1)][x]
-        if sum == find:
+        
+        if sum == 4 :
+            i -= 4
+        elif sum == find:
             ver.append((x,y-i))
     
     if len(ver) >0 :
@@ -150,7 +165,8 @@ def vertical_search(board, x, y, num, find): # top to bottom
     res = []
     if len(ver) > 0:
         if find == 3:
-            [res.append((x,y+j)) for (x,y) in ver for j in range(0, num) if board[y+j][x] == 0 and  check_5stones(board, x, y+j) == 0]
+            # [res.append((x,y+j)) for (x,y) in ver for j in range(0, num) if board[y+j][x] == 0 and  check_5stones(board, x, y+j) == 0]
+            [res.append((x,y+j)) for (x,y) in ver for j in range(0, num) if board[y+j][x] == 0 ]
         elif find == 2:
             items = set()
             [items.add((x, y+j)) for (x,y) in ver for j in range(0, num) if board[y+j][x] == 0]
