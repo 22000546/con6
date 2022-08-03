@@ -75,7 +75,7 @@ def find_first(board):
             continue
         board[y1][x1] = 1
         board[y2][x2] = 1
-        result = attack2.open2(board, [(x1, y1), (x2, y2)])
+        result = attack2.open2(1, board, [(x1, y1), (x2, y2)])
         open_score = find_open(board, (x1, y1)) + find_open(board, (x2, y2))
         if len(result) >= max_len and open_score > max_open:
             max_len = len(result)
