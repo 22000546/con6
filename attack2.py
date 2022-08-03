@@ -9,7 +9,7 @@ def attack_2(board, my_last_points, left):
 		return to_put
 	if left == 2:
 		# 일단 1개 써서 만들 수 있는 공격 있는지 해보고
-		points = open3(board, my_last_points)
+		points = open3(1, board, my_last_points)
 		# 있으면 거기 놓기로 하고
 		if points != None:
 			to_put.append(points)
