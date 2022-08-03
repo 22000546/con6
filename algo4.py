@@ -1,4 +1,3 @@
-import random
 from itertools import combinations
 import utils 
 
@@ -53,7 +52,6 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
             i -= 4
         elif sum == find :
             RD.append((x-i,y-i))
-            for 
 
     if len(RD) > 0:
         print("RD", RD, "x,y", x, y)
@@ -190,8 +188,8 @@ def algo4(left, stone, board):
         res = find_3stones_close(stone, board)
         if len(res) == 0:
             break
-        rand = random.randint(0, len(res)-1)
-        x,y = res[rand]
+        res = utils.get_max_open_point(1, board, res)
+        x,y = res
         board[y][x] = 1
         ret.append((x,y))
         left -= 1
@@ -202,9 +200,7 @@ def algo4(left, stone, board):
         if len(res) == 0:
             return ret 
         print("find 2stones close")
-        select_set = random.randint(0, len(res)-1)
-        rand = random.randint(0, len(res[select_set])-1)
-        (x,y),(x1,y1) = res[select_set][rand]
+        [(x, y), (x1, y1)] = utils.get_max_open_set_points(1, board, res)
         board[y][x] = 1
         board[y1][x1] = 1
         ret.append((x,y))
@@ -212,8 +208,7 @@ def algo4(left, stone, board):
     return ret 
 
 def find_3stones_close(stone, board):
-    last_ai_move = utils.get_ai_move()
-    last_away_move = utils.get_away_move()
+    last_ai_move = utils.get_ai_move_log()
 
     lst = []
 
@@ -245,8 +240,7 @@ def find_3stones_close(stone, board):
     return lst
 
 def find_2stones_close(stone, board):
-    last_ai_move = utils.get_ai_move()
-    last_away_move = utils.get_away_move()
+    last_ai_move = utils.get_ai_move_log()
 
     lst = []
 

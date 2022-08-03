@@ -1,6 +1,4 @@
 import utils
-import random
-
 
 def attack_2(board, my_last_points, left):
     # 3-1 내가 돌 1개만 사용
@@ -11,7 +9,8 @@ def attack_2(board, my_last_points, left):
 		# 일단 1개 써서 만들 수 있는 공격 있는지 해보고
 		points = open3(1, board, my_last_points)
 		# 있으면 거기 놓기로 하고
-		if points != None:
+		if len(points) > 0:
+			points = utils.get_max_open_point(1, board, list(points))
 			to_put.append(points)
 			board[points[1]][points[0]] = 1
 			left = left - 1
@@ -19,7 +18,8 @@ def attack_2(board, my_last_points, left):
 	if left == 1:
 		points = open3(1, board, my_last_points)
 		# 남은 돌로 또 만들 수 있으면 그 점까지 넣고 총 2개 return, 없으면 그냥 1개만
-		if points != None:
+		if len(points) > 0:
+			points = utils.get_max_open_point(1, board, list(points))
 			to_put.append(points)
 		return to_put
 	#남은 돌이 2개면 1개로 못했던거니까 2개로 가능한지 알아보기
@@ -28,7 +28,8 @@ def attack_2(board, my_last_points, left):
 		# 2개로 공격할 수 있으면 그냥 그 points들 바로 return
 		if len(points) > 0:
         	#print("open2 candidate : " + str(candidate))
-			return random.choice(list(points))
+			points = utils.get_max_open_points(1, board, list(points))
+			return points
 		# 2개로도 공격 못하면 그냥 빈거 return
 		else:
 			return to_put
@@ -318,11 +319,7 @@ def open3(stone, board, my_last_points):
 									if board[y+j][x-j] == 0:
 										candidate.add((x-j, y+j))
 							temp.clear()
-	if len(candidate):
-		print("open3 candidate : " + str(candidate))
-		return random.choice(list(candidate))
-	else:
-		return None
+	return candidate
 
 def open2(stone, board, my_last_points):
 	# stone 10일 때는 3번째 인자 away_move로 주어야 함 ! 

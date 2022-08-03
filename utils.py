@@ -187,3 +187,14 @@ def get_max_open_points(stone, board, points):
         board[y2][x2] = 0
         
     return max_points
+
+def get_max_open_set_points(stone, board, sets):        
+    max_lst = []
+    for set in sets:
+        point_lst = set
+        tmp = get_max_open_points(1, board, point_lst)
+        max_lst.append(tmp)
+        
+    result = get_max_open_points(1, board, max_lst)
+    return result
+        
