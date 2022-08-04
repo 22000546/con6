@@ -19,7 +19,13 @@ def find_defense_and_attack(board, left):
     if left == 0:
         return lst
     
-    attack_points = attack2.open2(0, board, ai_move_log) # 열린 1 -> 2로 만들 수 있는 지점
+    attack_points2 = attack2.open2(0, board, ai_move_log) # 열린 1 -> 2로 만들 수 있는 지점
+    attack_points3_two = attack2.open2(1, board, ai_move_log) # 열린 2 -> 3으로 만들 수 있는 지점
+    attack_points3 = set()
+    for (p1, p2) in attack_points3_two:
+        attack_points3.add(p1)
+        attack_points3.add(p2)
+    attack_points = attack_points2 | attack_points3
     defense_points2 = attack2.open2(10, board, away_move_log) # 상대방의 열린 2개를 막을 수 있는 지점
     defense_points3 = attack2.open3(10, board, away_move_log) # 상대방의 열린 3개를 막을 수 있는 지점 
     defense_points = defense_points2 | defense_points3 # 두 지점의 합집합 
