@@ -159,7 +159,9 @@ def get_max_open_point(stone, board, points):
     for (x, y) in points:
         point = [(x, y)]
         board[y][x] = 1
-        tmp = attack2.open2(1, board, stone_list)
+        tmp = attack2.open2(1, board, point)  # return type : set
+        tmp.update(attack2.open3(1, board, point)) 
+        # print("(x,y)",x,y, "len:",len(tmp),"===",tmp)
         if len(tmp) > max_open:
             max_open = len(tmp)
             max_point = point
@@ -180,9 +182,11 @@ def get_max_open_points(stone, board, points):
         [(x1, y1), (x2, y2)] = point
         board[y1][x1] = 1
         board[y2][x2] = 1
-        tmp = attack2.open2(1, board, stone_list)
-        if len(tmp) > max_open:
-            max_open = len(tmp)
+        open2 = len(attack2.open2(1, board, point))
+        open3 = len(attack2.open3(1, board, point))
+        close3 = len(algo4.find_3stones_close(1, board, point))
+        if open2*2 + open3*4 + close3 > max_open:
+            max_open = open2*2 + open3*4 + close3
             max_points = point
         board[y1][x1] = 0
         board[y2][x2] = 0

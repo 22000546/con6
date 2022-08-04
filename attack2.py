@@ -332,7 +332,7 @@ def open2(stone, board, my_last_points):
 			if(board[last_y][last_x-2]==0 and board[last_y][last_x-1]==0):
 				if(board[last_y][last_x+1] + board[last_y][last_x+2] + board[last_y][last_x+3] == 1*stone):
 					if(board[last_y][last_x+4] == 0 and board[last_y][last_x+5] == 0):
-						if stone == 1:
+						if stone == 1: # 내가 놓은 돌 2개로부터 공격 
 							for i in range(last_x, last_x+4):
 								if board[last_y][i] == 0:
 									temp.append((i, last_y))
@@ -340,7 +340,7 @@ def open2(stone, board, my_last_points):
 							candidate.add(tuple(temp))
 							temp.clear()
 						elif stone == 10 :
-							# 상대방 돌 주위 2칸 이내 
+							# 상대방 돌 주위 2칸 이내 방어점 설정 
 							for i in range(last_x, last_x+4):
 								if board[last_y][i] == stone:
 									temp.append((i, last_y))
@@ -349,7 +349,7 @@ def open2(stone, board, my_last_points):
 									if board[y][x+j] == 0:
 										candidate.add((x+j, y))
 							temp.clear()
-						elif stone == 0 : 
+						elif stone == 0 : # algo6에서 사용 
 							candidate.update([(last_x+1,last_y),(last_x+2,last_y),(last_x+3,last_y)])
 		if(last_x >= 3 and last_x <= 14): # 가운데 4칸 중에 내가 놓은 돌이 두 번째 
 			if(board[last_y][last_x-3]==0 and board[last_y][last_x-2]==0):
