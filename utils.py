@@ -150,11 +150,7 @@ def get_board(ai_home):
 def get_max_open_point(stone, board, points):
     # points = [(x,y), (x,y), ...]
     # print("point", points)
-    if stone == 1:
-        stone_list = ai_move_log
-    else:
-        stone_list = away_move_log
-        
+    
     max_open = -1
     for (x, y) in points:
         point = [(x, y)]
@@ -165,18 +161,50 @@ def get_max_open_point(stone, board, points):
         open2 = len(attack2.open2(1, board, point))
         open3 = len(attack2.open3(1, board, point))
         close3 = len(algo4.find_3stones_close(1, board, point))
-        defense = len(attack2.open2(10, board, point))
-        defense += len(attack2.open3(10, board, point))
-        new_score = open2*2 + open3*4 + close3 + 6*close4 + 10*close5
+        defense1 = len(attack2.open2(10, board, point))
+        defense2 = len(attack2.open3(10, board, point))
+        new_score = open2 + open3 + close3 + close4 + close5
+        new_length = [close5, close4, open3, open2, close3, defense2, defense1]
+        print("p", point, new_length)
         if new_score > max_open:
             max_open = new_score
             max_point = point
-            max_defense = defense
+            max_length = new_length
         elif new_score == max_open:
-            if defense > max_defense:
+            if max_length[0] < new_length[0]:
                 max_open = new_score
                 max_point = point
-                max_defense = defense
+                max_length = new_length
+            elif max_length[0] == new_length[0]:
+                if max_length[1] < new_length[1]:
+                    max_open = new_score
+                    max_point = point
+                    max_length = new_length
+                elif max_length[1] == new_length[1]:
+                    if max_length[2] < new_length[2]:
+                        max_open = new_score
+                        max_point = point
+                        max_length = new_length
+                    elif max_length[2] == new_length[2]:
+                        if max_length[3] < new_length[3]:
+                            max_open = new_score
+                            max_point = point
+                            max_length = new_length
+                        elif max_length[3] == new_length[3]:
+                            if max_length[4] < new_length[4]:
+                                max_open = new_score
+                                max_point = point
+                                max_length = new_length
+                            elif max_length[4] == new_length[4]:
+                                if max_length[5] < new_length[5]:
+                                    max_open = new_score
+                                    max_point = point
+                                    max_length = new_length
+                                elif max_length[5] == new_length[5]:
+                                    if max_length[6] < new_length[6]:
+                                        max_open = new_score
+                                        max_point = point
+                                        max_length = new_length
         board[y][x] = 0
         
     return max_point
@@ -186,7 +214,6 @@ def get_max_open_points(stone, board, points):
     # print("point", points)
         
     max_open = -1
-    max_defense = -1
     for point in points:
         [(x1, y1), (x2, y2)] = point
         board[y1][x1] = 1
@@ -196,18 +223,49 @@ def get_max_open_points(stone, board, points):
         open2 = len(attack2.open2(1, board, point))
         open3 = len(attack2.open3(1, board, point))
         close3 = len(algo4.find_3stones_close(1, board, point))
-        defense = len(attack2.open2(10, board, point))
-        defense += len(attack2.open3(10, board, point))
-        new_score = open2*2 + open3*4 + close3 + 6*close4 + 10*close5
+        defense1 = len(attack2.open2(10, board, point))
+        defense2 = len(attack2.open3(10, board, point))
+        new_score = open2 + open3 + close3 + close4 + close5
+        new_length = [close5, close4, open3, open2, close3, defense2, defense1]
         if new_score > max_open:
             max_open = new_score
             max_points = point
-            max_defense = defense
+            max_length = new_length
         elif new_score == max_open:
-            if defense > max_defense:
+            if max_length[0] < new_length[0]:
                 max_open = new_score
                 max_points = point
-                max_defense = defense
+                max_length = new_length
+            elif max_length[0] == new_length[0]:
+                if max_length[1] < new_length[1]:
+                    max_open = new_score
+                    max_points = point
+                    max_length = new_length
+                elif max_length[1] == new_length[1]:
+                    if max_length[2] < new_length[2]:
+                        max_open = new_score
+                        max_points = point
+                        max_length = new_length
+                    elif max_length[2] == new_length[2]:
+                        if max_length[3] < new_length[3]:
+                            max_open = new_score
+                            max_points = point
+                            max_length = new_length
+                        elif max_length[3] == new_length[3]:
+                            if max_length[4] < new_length[4]:
+                                max_open = new_score
+                                max_points = point
+                                max_length = new_length
+                            elif max_length[4] == new_length[4]:
+                                if max_length[5] < new_length[5]:
+                                    max_open = new_score
+                                    max_points = point
+                                    max_length = new_length
+                                elif max_length[5] == new_length[5]:
+                                    if max_length[6] < new_length[6]:
+                                        max_open = new_score
+                                        max_points = point
+                                        max_length = new_length
         board[y1][x1] = 0
         board[y2][x2] = 0
         
