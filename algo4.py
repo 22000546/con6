@@ -65,6 +65,11 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
             if check == 4 or check2 == 4:
                 i-=3
             else :
+                try:
+                    if board[y-i-1][x-i-1] == 0 and board[y-i-2][x-i-2] == 0 and board[y-i+6][x-i+6] == 0 and board[y-i+7][x-i+7] == 0: # open3인 경우 
+                        continue
+                except IndexError:
+                    continue 
                 RD.append((x-i,y-i))
 
     if len(RD) > 0:
@@ -115,6 +120,11 @@ def diagonal_RU_search(board, x, y, num, find): # left bottom to right up
             if check == 4 or check2 == 4:
                 i-=3
             else :
+                try:
+                    if board[y+i+1][x-i-1] == 0 and board[y+i+2][x-i-2] == 0 and board[y+i-6][x-i+6] == 0 and board[y+i-7][x-i+7] == 0:
+                        continue
+                except IndexError:
+                    continue 
                 RU.append((x-i,y+i))
     
     if len(RU) > 0:
@@ -164,6 +174,11 @@ def horizontal_search(board, x, y, num, find):  # left to right
             if check == 4 or check2 == 4:
                 i-=3
             else:
+                try:
+                    if board[y][x-i-1] == 0 and board[y][x-i-2] == 0 and board[y][x-i+6] == 0 and board[y][x-i+7] == 0:
+                        continue 
+                except IndexError:
+                    continue 
                 hori.append((x-i,y))
         
     if len(hori) > 0 :
@@ -213,6 +228,11 @@ def vertical_search(board, x, y, num, find): # top to bottom
             if check == 4 or check2 == 4:
                 i-=3
             else:
+                try:
+                    if board[y-i-1][x] == 0 and board[y-i-2][x] == 0 and board[y-i+6][x] == 0 and board[y-i+7][x] == 0 :
+                        continue 
+                except IndexError:
+                    continue 
                 ver.append((x,y-i))
     
     if len(ver) >0 :
