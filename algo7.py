@@ -42,21 +42,21 @@ def find_any(stone, board, left):
         stone_list = utils.get_away_move_log()
     
     for (x, y) in stone_list:
-        if x-1 > 0 or y-1 > 0 or board[y-1][x-1] == 0:
+        if x-1 > 0 and y-1 > 0 and board[y-1][x-1] == 0:
             lst.append([(x-1, y-1)])
-        if x-1 > 0 or board[y][x-1] == 0:
+        if x-1 > 0 and board[y][x-1] == 0:
             lst.append([(x-1, y)])
-        if x-1 > 0 or y+1 < 19 or board[y+1][x-1] == 0:
+        if x-1 > 0 and y+1 < 19 and board[y+1][x-1] == 0:
             lst.append([(x-1, y+1)])
-        if y-1 > 0 or board[y-1][x] == 0:
+        if y-1 > 0 and board[y-1][x] == 0:
             lst.append([(x, y-1)])
-        if y+1 < 19 or board[y+1][x] == 0:
+        if y+1 < 19 and board[y+1][x] == 0:
             lst.append([(x, y+1)])
-        if x+1 < 19 or y-1 > 0 or board[y-1][x+1] == 0:
+        if x+1 < 19 and y-1 > 0 and board[y-1][x+1] == 0:
             lst.append([(x+1, y-1)])
-        if x+1 < 19 or board[y][x+1] == 0:
+        if x+1 < 19 and board[y][x+1] == 0:
             lst.append([(x+1, y)])
-        if x+1 < 19 or y+1 < 19 or board[y+1][x+1] == 0:
+        if x+1 < 19 and y+1 < 19 and board[y+1][x+1] == 0:
             lst.append([(x+1, y+1)])
             
     if len(lst) != 0:
