@@ -1,5 +1,6 @@
 from itertools import combinations
-import utils 
+import utils
+import attack2 
 
 def check_5stones(board, x, y):
     # 내가 돌을 놨을 때 8방향으로 내 돌 5개+빈칸 인 경우가 만들어 지는지 확인 
@@ -51,10 +52,14 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
         if sum == 4 :
             i -= 4
         elif sum == find :
-            check = 0
+            check = check2 = 0
             for j in range(0, num):
                 check += board[y-i-1+j][x-i-1+j]
-            if check == 4:
+                try:
+                    check2 += board[y-i+1+j][x-i+1+j]
+                except IndexError:
+                    continue 
+            if check == 4 or check2 == 4:
                 i-=3
             else :
                 RD.append((x-i,y-i))
@@ -94,10 +99,14 @@ def diagonal_RU_search(board, x, y, num, find): # left bottom to right up
         if sum == 4 :
             i -= 4
         elif sum == find:
-            check = 0
+            check = check2 = 0
             for j in range(0, num):
                 check += board[y+i+1-j][x-i-1+j]
-            if check == 4:
+                try:
+                    check2 += board[y+i-1-j][x-i+1+j]
+                except IndexError:
+                    continue 
+            if check == 4 or check2 == 4:
                 i-=3
             else :
                 RU.append((x-i,y+i))
@@ -136,10 +145,14 @@ def horizontal_search(board, x, y, num, find):  # left to right
         if sum == 4 :
             i -= 4
         elif sum == find:
-            check = 0
+            check = check2 = 0
             for j in range(0, num):
                 check += board[y][x-i-1+j]
-            if check == 4:
+                try:
+                    check2 += board[y][x-i+1+j]
+                except IndexError:
+                    continue
+            if check == 4 or check2 == 4:
                 i-=3
             else:
                 hori.append((x-i,y))
@@ -178,10 +191,14 @@ def vertical_search(board, x, y, num, find): # top to bottom
         if sum == 4 :
             i -= 4
         elif sum == find:
-            check = 0
+            check = check2 =0
             for j in range(0, num):
                 check += board[y-i-1+j][x]
-            if check == 4:
+                try:
+                    check2 += board[y-i+1+j][x]
+                except IndexError:
+                    continue 
+            if check == 4 or check2 == 4:
                 i-=3
             else:
                 ver.append((x,y-i))
@@ -224,6 +241,23 @@ def algo4(left, stone, board):
         if len(res) == 0:
             return ret 
         print("find 2stones close")
+
+        print("res",res)
+        for set in res:
+            for points in set:
+                [(x1, y1), (x2, y2)] = points
+                board[y1][x1] = 1
+                board[y2][x2] = 1
+                open2 = len(attack2.open2(1, board, points))
+                open3 = len(attack2.open3(1, board, points))
+                close3 = len(find_3stones_close(1, board, points))
+
+                board[y1][x1] = 0
+                board[y2][x2] = 0
+
+                if open2 == 0 and open3 == 0 and close3 == 0:
+                    return ret
+
         [(x, y), (x1, y1)] = utils.get_max_open_set_points(1, board, res)
         board[y][x] = 1
         board[y1][x1] = 1
@@ -231,8 +265,12 @@ def algo4(left, stone, board):
         ret.append((x1,y1))
     return ret 
 
-def find_3stones_close(stone, board):
-    last_ai_move = utils.get_ai_move_log()
+def find_3stones_close(stone, board, points = None):
+
+    if points == None:
+        last_ai_move = utils.get_ai_move_log()
+    else:
+        last_ai_move = points
 
     lst = []
 
