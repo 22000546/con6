@@ -54,11 +54,14 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
         elif sum == find :
             check = check2 = 0
             for j in range(0, num):
-                check += board[y-i-1+j][x-i-1+j]
+                try:
+                    check += board[y-i-1+j][x-i-1+j]
+                except IndexError:
+                    pass
                 try:
                     check2 += board[y-i+1+j][x-i+1+j]
                 except IndexError:
-                    continue 
+                    pass
             if check == 4 or check2 == 4:
                 i-=3
             else :
@@ -101,11 +104,14 @@ def diagonal_RU_search(board, x, y, num, find): # left bottom to right up
         elif sum == find:
             check = check2 = 0
             for j in range(0, num):
-                check += board[y+i+1-j][x-i-1+j]
+                try:
+                    check += board[y+i+1-j][x-i-1+j]
+                except IndexError:
+                    pass 
                 try:
                     check2 += board[y+i-1-j][x-i+1+j]
                 except IndexError:
-                    continue 
+                    pass 
             if check == 4 or check2 == 4:
                 i-=3
             else :
@@ -147,11 +153,14 @@ def horizontal_search(board, x, y, num, find):  # left to right
         elif sum == find:
             check = check2 = 0
             for j in range(0, num):
-                check += board[y][x-i-1+j]
+                try:
+                    check += board[y][x-i-1+j]
+                except IndexError:
+                    pass 
                 try:
                     check2 += board[y][x-i+1+j]
                 except IndexError:
-                    continue
+                    pass
             if check == 4 or check2 == 4:
                 i-=3
             else:
@@ -193,11 +202,14 @@ def vertical_search(board, x, y, num, find): # top to bottom
         elif sum == find:
             check = check2 =0
             for j in range(0, num):
-                check += board[y-i-1+j][x]
+                try:
+                    check += board[y-i-1+j][x]
+                except IndexError:
+                    pass
                 try:
                     check2 += board[y-i+1+j][x]
                 except IndexError:
-                    continue 
+                    pass
             if check == 4 or check2 == 4:
                 i-=3
             else:
