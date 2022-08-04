@@ -294,7 +294,7 @@ def find_4stones_semi_close(stone, board, left):
     
     return lst
 
-def find_4stones_close(stone, board, left):
+def find_4stones_close(stone, board, left, stone_list=None):
     ai_move_log = utils.get_ai_move_log()
     away_move_log = utils.get_away_move_log()
     lst = []
@@ -302,10 +302,11 @@ def find_4stones_close(stone, board, left):
     if left == 0:
         return lst
     
-    if stone == 1:
-        stone_list = ai_move_log
-    else:
-        stone_list = away_move_log
+    if stone_list is None:
+        if stone == 1:
+            stone_list = ai_move_log
+        else:
+            stone_list = away_move_log
         
     for (x, y) in stone_list:
         # 양 옆

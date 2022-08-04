@@ -159,16 +159,24 @@ def get_max_open_point(stone, board, points):
     for (x, y) in points:
         point = [(x, y)]
         board[y][x] = 1
-        # tmp_1 = algo1.find_5stones_close(1, board, 1)
-        # #print("tmp1", tmp_1)
-        # tmp_2 = algo1.find_4stones_close(1, board, 2)
-        #print("tmp1", tmp_2)
-        tmp = attack2.open2(1, board, point)  # return type : set
-        tmp.update(attack2.open3(1, board, point)) 
-        # print("(x,y)",x,y, "len:",len(tmp),"===",tmp)
-        if len(tmp) > max_open:
-            max_open = len(tmp)
+        # print("point", point)
+        close5 = len(algo1.find_5stones_close(1, board, 2, point))
+        close4 = len(algo2.find_4stones_close(1, board, 2, point))
+        open2 = len(attack2.open2(1, board, point))
+        open3 = len(attack2.open3(1, board, point))
+        close3 = len(algo4.find_3stones_close(1, board, point))
+        defense = len(attack2.open2(10, board, point))
+        defense += len(attack2.open3(10, board, point))
+        new_score = open2*2 + open3*4 + close3 + 6*close4 + 10*close5
+        if new_score > max_open:
+            max_open = new_score
             max_point = point
+            max_defense = defense
+        elif new_score == max_open:
+            if defense > max_defense:
+                max_open = new_score
+                max_point = point
+                max_defense = defense
         board[y][x] = 0
         
     return max_point
@@ -176,22 +184,30 @@ def get_max_open_point(stone, board, points):
 def get_max_open_points(stone, board, points):
     # points = [ [(x,y), (x,y)], [(x,y), (x,y)], ...]
     # print("point", points)
-    if stone == 1:
-        stone_list = ai_move_log
-    else:
-        stone_list = away_move_log
         
     max_open = -1
+    max_defense = -1
     for point in points:
         [(x1, y1), (x2, y2)] = point
         board[y1][x1] = 1
         board[y2][x2] = 1
+        close5 = len(algo1.find_5stones_close(1, board, 2, point))
+        close4 = len(algo2.find_4stones_close(1, board, 2, point))
         open2 = len(attack2.open2(1, board, point))
         open3 = len(attack2.open3(1, board, point))
         close3 = len(algo4.find_3stones_close(1, board, point))
-        if open2*2 + open3*4 + close3 > max_open:
-            max_open = open2*2 + open3*4 + close3
+        defense = len(attack2.open2(10, board, point))
+        defense += len(attack2.open3(10, board, point))
+        new_score = open2*2 + open3*4 + close3 + 6*close4 + 10*close5
+        if new_score > max_open:
+            max_open = new_score
             max_points = point
+            max_defense = defense
+        elif new_score == max_open:
+            if defense > max_defense:
+                max_open = new_score
+                max_points = point
+                max_defense = defense
         board[y1][x1] = 0
         board[y2][x2] = 0
         
