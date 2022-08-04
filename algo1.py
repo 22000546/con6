@@ -34,7 +34,7 @@ def find_5stones_close(stone, board, left):
                     if board[y][i+j] == 0:
                         tmp_lst.append((i+j, y))
                     if len(tmp_lst) != 0:
-                        lst.append(tmp_lst)       
+                        lst.extend(tmp_lst)       
         # 위아래
         for i in range(y-5, y+1):
             if i < 0 or i > 13:
@@ -46,7 +46,7 @@ def find_5stones_close(stone, board, left):
                     if board[i+j][x] == 0:
                         tmp_lst.append((x, i+j))
                     if len(tmp_lst) != 0:
-                        lst.append(tmp_lst)
+                        lst.extend(tmp_lst)
         # 왼쪽 위 오른쪽 아래 대각선
         for i in range(6):
             if x-5+i < 0 or y-5+i < 0 or x+i > 18 or y+i > 18:
@@ -58,7 +58,7 @@ def find_5stones_close(stone, board, left):
                     if board[y-j+i][x-j+i] == 0:
                         tmp_lst.append((x-j+i, y-j+i))
                     if len(tmp_lst) != 0:
-                        lst.append(tmp_lst)
+                        lst.extend(tmp_lst)
         # 오른쪽 위 왼쪽 아래 대각선
         for i in range(6):
             if x-5+i < 0 or y+5-i > 18 or x+i > 18 or y-i < 0:
@@ -70,7 +70,7 @@ def find_5stones_close(stone, board, left):
                     if board[y+j-i][x-j+i] == 0:
                         tmp_lst.append((x-j+i, y+j-i))
                     if len(tmp_lst) != 0:
-                        lst.append(tmp_lst)
+                        lst.extend(tmp_lst)
        
     if len(lst) != 0:
         lst = utils.get_max_open_point(1, board, lst)
@@ -103,7 +103,7 @@ def find_4stones_close(stone, board, left):
                     if board[y][i+j] == 0:
                         tmp_lst.append((i+j, y))
                     if len(tmp_lst) != 0:
-                        lst.append(tmp_lst)
+                        lst.extend(tmp_lst)
         # 위아래
         for i in range(y-5, y+1):
             if i < 0 or i > 13:
@@ -115,7 +115,7 @@ def find_4stones_close(stone, board, left):
                     if board[i+j][x] == 0:
                         tmp_lst.append((x, i+j))
                     if len(tmp_lst) != 0:
-                        lst.append(tmp_lst)
+                        lst.extend(tmp_lst)
         # 왼쪽 위 오른쪽 아래 대각선
         for i in range(6):
             if x-5+i < 0 or y-5+i < 0 or x+i > 18 or y+i > 18:
@@ -127,7 +127,7 @@ def find_4stones_close(stone, board, left):
                     if board[y-j+i][x-j+i] == 0:
                         tmp_lst.append((x-j+i, y-j+i))
                     if len(tmp_lst) != 0:
-                        lst.append(tmp_lst)
+                        lst.extend(tmp_lst)
         # 오른쪽 위 왼쪽 아래 대각선
         for i in range(6):
             if x-5+i < 0 or y+5-i > 18 or x+i > 18 or y-i < 0:
@@ -139,7 +139,7 @@ def find_4stones_close(stone, board, left):
                     if board[y+j-i][x-j+i] == 0:
                         tmp_lst.append((x-j+i, y+j-i))
                     if len(tmp_lst) != 0:
-                        lst.append(tmp_lst)
+                        lst.extend(tmp_lst)
        
     if len(lst) != 0:
         lst = utils.get_max_open_points(1, board, lst)
