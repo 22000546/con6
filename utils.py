@@ -162,11 +162,12 @@ def get_max_open_point(stone, board, points):
         open3 = len(attack2.open3(1, board, point))
         close3 = len(algo4.find_3stones_close(1, board, point))
         board[y][x] = 0
-        defense1 = len(attack2.open2(10, board, point))
-        defense2 = len(attack2.open3(10, board, point))
+        defense1 = len(attack2.open2(10, board, point)) # 상대방 열린 2 막기 
+        defense2 = len(attack2.open3(10, board, point)) # 상대방 열린 3 막기 
+        defense3 = len(attack2.open2(5, board, point)) # 상대방 열린 1 막기 
         new_score = open2 + open3 + close3 + close4 + close5 + defense2 + defense1
-        new_length = [close5, close4, defense2, defense1, open3, open2, close3]
-        print("x,y",x,y, "==",new_length)
+        new_length = [close5, close4, defense2, defense1, open3, open2, close3, defense3]
+        # print("x,y",x,y, "==",new_length)
         if new_score > max_open:
             max_open = new_score
             max_point = point
@@ -206,6 +207,11 @@ def get_max_open_point(stone, board, points):
                                         max_open = new_score
                                         max_point = point
                                         max_length = new_length
+                                    elif max_length[6] == new_length[6]:
+                                        if max_length[7] < new_length[7]:
+                                            max_open = new_score
+                                            max_points = point
+                                            max_length = new_length
         
     return max_point
 
@@ -227,8 +233,10 @@ def get_max_open_points(stone, board, points):
         board[y2][x2] = 0
         defense1 = len(attack2.open2(10, board, point))
         defense2 = len(attack2.open3(10, board, point))
+        defense3 = len(attack2.open2(5, board, point))
         new_score = open2 + open3 + close3 + close4 + close5 + defense2 + defense1
-        new_length = [close5, close4, defense2, defense1, open3, open2, close3]
+        new_length = [close5, close4, defense2, defense1, open3, open2, close3, defense3]
+        print("point",point, "==", new_length)
         if new_score > max_open:
             max_open = new_score
             max_points = point
@@ -268,6 +276,11 @@ def get_max_open_points(stone, board, points):
                                         max_open = new_score
                                         max_points = point
                                         max_length = new_length
+                                    elif max_length[6] == new_length[6]:
+                                        if max_length[7] < new_length[7]:
+                                            max_open = new_score
+                                            max_points = point
+                                            max_length = new_length
         
     return max_points
 

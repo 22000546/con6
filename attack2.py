@@ -349,7 +349,7 @@ def open2(stone, board, my_last_points):
 									if board[y][x+j] == 0:
 										candidate.add((x+j, y))
 							temp.clear()
-						elif stone == 0.5 : # algo6에서 사용 
+						elif stone == 0.5 or stone == 5: # algo6에서 사용 
 							candidate.update([(last_x+1,last_y),(last_x+2,last_y),(last_x+3,last_y)])
 		if(last_x >= 3 and last_x <= 14): # 가운데 4칸 중에 내가 놓은 돌이 두 번째 
 			if(board[last_y][last_x-3]==0 and board[last_y][last_x-2]==0):
@@ -371,7 +371,7 @@ def open2(stone, board, my_last_points):
 									if board[y][x+j] == 0:
 										candidate.add((x+j, y))
 							temp.clear()
-						elif stone == 0.5 : 
+						elif stone == 0.5 or stone == 5: 
 							candidate.update([(last_x-1,last_y),(last_x+1,last_y),(last_x+2,last_y)])
 		if(last_x >= 4 and last_x <= 15): # 가운데 4칸 중에 내가 놓은 돌이 세 번째 
 			if(board[last_y][last_x-4]==0 and board[last_y][last_x-3]==0):
@@ -393,7 +393,7 @@ def open2(stone, board, my_last_points):
 									if board[y][x+j] == 0:
 										candidate.add((x+j, y))
 							temp.clear()
-						elif stone == 0.5 : 
+						elif stone == 0.5 or stone == 5: 
 							candidate.update([(last_x-2,last_y),(last_x-1,last_y),(last_x+1,last_y)])
 		if(last_x >= 5 and last_x <= 16): # 가운데 4칸 중에 내가 놓은 돌이 네 번째 
 			if(board[last_y][last_x-5]==0 and board[last_y][last_x-4]==0):
@@ -415,7 +415,7 @@ def open2(stone, board, my_last_points):
 									if board[y][x+j] == 0:
 										candidate.add((x+j, y))
 							temp.clear()
-						elif stone == 0.5 : 
+						elif stone == 0.5 or stone == 5: 
 							candidate.update([(last_x-3,last_y),(last_x-2,last_y),(last_x-1,last_y)])
 		# |방향
 		if(last_y >= 2 and last_y <= 13):
@@ -438,7 +438,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x] == 0:
 										candidate.add((x, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x, last_y+1), (last_x, last_y+2), (last_x, last_y+3)])
 		if(last_y >= 3 and last_y <= 14):
 			if(board[last_y-3][last_x]==0 and board[last_y-2][last_x]==0):
@@ -460,7 +460,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x] == 0:
 										candidate.add((x, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x, last_y-1), (last_x, last_y+1), (last_x, last_y+2)])
 		if(last_y >= 4 and last_y <= 15):
 			if(board[last_y-4][last_x]==0 and board[last_y-3][last_x]==0):
@@ -482,7 +482,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x] == 0:
 										candidate.add((x, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x, last_y-2), (last_x, last_y-1), (last_x, last_y+1)])
 		if(last_y >= 5 and last_y <= 16):
 			if(board[last_y-5][last_x]==0 and board[last_y-4][last_x]==0):
@@ -504,7 +504,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x] == 0:
 										candidate.add((x, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x, last_y-3), (last_x, last_y-2), (last_x, last_y-1)])
 		# \방향
 		if(last_x >= 2 and last_x <= 13 and last_y >=2 and last_y <=13):
@@ -527,7 +527,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x+j] == 0:
 										candidate.add((x+j, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x+1, last_y+1), (last_x+2, last_y+2), (last_x+3, last_y+3)])
 		if(last_x >= 3 and last_x <= 14 and last_y >=3 and last_y <=14):
 			if(board[last_y-3][last_x-3]==0 and board[last_y-2][last_x-2]==0):
@@ -549,7 +549,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x+j] == 0:
 										candidate.add((x+j, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x-1, last_y-1), (last_x+1, last_y+1), (last_x+2, last_y+2)])
 		if(last_x >= 4 and last_x <= 15 and last_y >=4 and last_y <=15):
 			if(board[last_y-4][last_x-4]==0 and board[last_y-3][last_x-3]==0):
@@ -571,7 +571,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x+j] == 0:
 										candidate.add((x+j, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x-2, last_y-2), (last_x-1, last_y-1), (last_x+1, last_y+1)])
 		if(last_x >= 5 and last_x <= 16 and last_y >=5 and last_y <=16):
 			if(board[last_y-5][last_x-5]==0 and board[last_y-4][last_x-4]==0):
@@ -593,7 +593,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x+j] == 0:
 										candidate.add((x+j, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x-3, last_y-3), (last_x-2, last_y-2), (last_x-1, last_y-1)])
 		# /방향
 		if(last_x >= 5 and last_x <= 16 and last_y >=2 and last_y <=13):
@@ -616,7 +616,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x-j] == 0:
 										candidate.add((x-j, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x-1, last_y+1), (last_x-2, last_y+2), (last_x-3, last_y+3)])
 		if(last_x >= 4 and last_x <= 15 and last_y >=3 and last_y <=14):
 			if(board[last_y-3][last_x+3]==0 and board[last_y-2][last_x+2]==0):
@@ -638,7 +638,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x-j] == 0:
 										candidate.add((x-j, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x+1, last_y-1), (last_x-1, last_y+1), (last_x-2, last_y+2)])
 		if(last_x >= 4 and last_x <= 14 and last_y >=4 and last_y <=14):
 			if(board[last_y-4][last_x+4]==0 and board[last_y-3][last_x+3]==0):
@@ -660,7 +660,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x-j] == 0:
 										candidate.add((x-j, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x+2, last_y-2), (last_x+1, last_y-1), (last_x-1, last_y+1)])
 		if(last_x >= 2 and last_x <= 13 and last_y >=5 and last_y <=16):
 			if(board[last_y-5][last_x+5]==0 and board[last_y-4][last_x+4]==0):
@@ -682,7 +682,7 @@ def open2(stone, board, my_last_points):
 									if board[y+j][x-j] == 0:
 										candidate.add((x-j, y+j))
 							temp.clear()
-						elif stone == 0.5:
+						elif stone == 0.5 or stone == 5:
 							candidate.update([(last_x+3, last_y-3), (last_x+2, last_y-2), (last_x+1, last_y-1)])
       
 	return candidate
