@@ -1,4 +1,5 @@
 import utils
+import algo4
 
 def attack_2(board, my_last_points, left):
 	# 3-1 내가 돌 1개만 사용
@@ -24,12 +25,27 @@ def attack_2(board, my_last_points, left):
 		return to_put
 	#남은 돌이 2개면 1개로 못했던거니까 2개로 가능한지 알아보기
 	elif left == 2:
-		points = open2(1, board, my_last_points)
-		# 2개로 공격할 수 있으면 그냥 그 points들 바로 return
-		if len(points) > 0:
-        	#print("open2 candidate : " + str(candidate))
-			points = utils.get_max_open_points(1, board, list(points))
-			return points
+		points_open2 = open2(1, board, my_last_points)
+		if len(points_open2) > 0:
+			res_3 = utils.get_max_open_points(1, board, list(points_open2))
+			points_close3_2_1 = algo4.find_3stones_close(1, board)
+			if len(points_close3_2_1) > 0:
+				res_1 = utils.get_max_open_point(1, board, points_close3_2_1)
+				board[res_1[0][1]][res_1[0][0]] = 1
+				points_close3_2_2 = algo4.find_3stones_close(1, board)
+				if len(points_close3_2_2) == 0:
+					board[res_1[0][1]][res_1[0][0]] = 0
+					return res_3
+				else:
+					res_2 = utils.get_max_open_point(1, board, points_close3_2_2)
+					tmp_lst = [(res_1[0], res_2[0]), res_3]
+					print("tmp_lst", tmp_lst)
+					points = utils.get_max_open_points(1, board, tmp_lst)
+					return points
+			# 2개로 공격할 수 있으면 그냥 그 points들 바로 return
+			else:
+      			#print("open2 candidate : " + str(candidate))
+				return res_3
 		# 2개로도 공격 못하면 그냥 빈거 return
 		else:
 			return to_put
