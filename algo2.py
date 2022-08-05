@@ -213,9 +213,9 @@ def find_4stones_semi_open(stone, board, left):
             if x-4+i < 0 or y+4-i > 18 or x+1+i > 18 or y-1-i < 0:
                 continue
             if board[y+4-i][x-4+i] == 0 and board[y+3-i][x-3+i] == stone and board[y+2-i][x-2+i] == stone and board[y+1-i][x-1+i] == stone and board[y-i][x+i] == stone and board[y-1-i][x+1+i] == 0:
-                if x-5+i < 0 or y+5-i < 0 or board[y+5-i][x-5+i] != 0: # 왼쪽 막힘
+                if x-5+i < 0 or y+5-i > 18 or board[y+5-i][x-5+i] != 0: # 왼쪽 막힘
                     lst.append((x+1+i, y-1-i))
-                elif x+2+i > 18 or y-2-i > 18 or board[y-2-i][x+2+i] != 0: # 오른쪽 막힘
+                elif x+2+i > 18 or y-2-i < 0 or board[y-2-i][x+2+i] != 0: # 오른쪽 막힘
                     lst.append((x-4+i, y+4-i))
         
     if len(lst) != 0:
