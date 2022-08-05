@@ -3,20 +3,14 @@ import utils
 def attack_2(board, my_last_points, left):
 	# 3-1 내가 돌 1개만 사용
 	to_put = []
-	print("board1")
-	print(board)
 	if left ==0:
 		return to_put
 	if left == 2:
 		# 일단 1개 써서 만들 수 있는 공격 있는지 해보고
 		points = open3(1, board, my_last_points)
-		print("board2")
-		print(board)
 		# 있으면 거기 놓기로 하고
 		if len(points) > 0:
 			points = utils.get_max_open_point(1, board, list(points))
-			print("board3")
-			print(board)
 			to_put.extend(points)
 			board[points[0][1]][points[0][0]] = 1
 			left = left - 1
