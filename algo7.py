@@ -5,29 +5,39 @@ def algo7(board, left):
     # 상대방이 놓았던 돌 주위를 (8개 지점) 탐색하며 빈칸을 찾아 랜덤으로 빈칸 중 하나를 선택
     result = find_any(10, board, left)
     left -= len(result)
+    if len(result) > 0:
+        print("find yours")
     
     if left > 0:
         result_tmp = find_any(10, board, left)
         left -= len(result_tmp)
         result += result_tmp
+        if len(result_tmp) > 0:
+            print("find yours")
     
     if left > 0:
         # 내가 놓았던 돌 주위를 (8개 지점) 탐색하며 빈칸을 찾아 랜덤으로 빈칸 중 하나를 선택
         result_tmp = find_any(1, board, left)
         left -= len(result_tmp)
         result += result_tmp
+        if len(result_tmp) > 0:
+            print("find yours")
         
     if left > 0:
         # 오른쪽 아래 코너에서 순서대로 선택
         result_tmp = find_corner(board, left)
         left -= len(result_tmp)
         result += result_tmp
+        if len(result_tmp) > 0:
+            print("find corner")
         
     while left > 0:
         # 오른쪽 코너에서 더이상 선택할 지점이 없으면 랜덤으로 빈칸을 선택
         result_tmp = find_random(1, board, left)
         left -= len(result_tmp)
         result += result_tmp
+        if len(result_tmp) > 0:
+            print("find random")
         
     return result
 
