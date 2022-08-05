@@ -63,13 +63,10 @@ def find_defense_and_attack(board, left):
         lst = utils.get_max_open_point(1, board, list(defense_points2))
         board[lst[0][1]][lst[0][0]] = 1
         print("defense2")
-    elif len(attack_points3) > 0:
-        lst = utils.get_max_open_point(1, board, list(attack_points3))
+    elif len(attack_points3) + len(attack_points2) > 0:
+        attack_points = attack_points2 | attack_points3
+        lst = utils.get_max_open_point(1, board, list(attack_points))
         board[lst[0][1]][lst[0][0]] = 1
-        print("attack3")
-    elif len(attack_points2) > 0:
-        lst = utils.get_max_open_point(1, board, list(attack_points2))
-        board[lst[0][1]][lst[0][0]] = 1
-        print("attack2")
+        print("attack2 or 3")
     
     return lst
