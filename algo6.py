@@ -36,7 +36,7 @@ def find_defense_and_attack(board, left):
     intersect1 = attack_points3 & defense_points3
     intersect2 = attack_points2 & defense_points3
     intersect3 = attack_points3 & defense_points2
-    intersect4 = attack_points2 & defense_points3
+    intersect4 = attack_points2 & defense_points2
     
     # attack3 + defense3
     if len(intersect1) > 0:
