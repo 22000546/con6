@@ -4,12 +4,13 @@ def algo1(stone, board, left):
 	if left > 0:
 		result = find_5stones_close(stone, board, left)
 		if len(result) != 0:
+			board[result[0][1]][result[0][0]] = 1
 			return result
 	if left == 2:
 		result = find_4stones_close(stone, board, left)	
 	return result
 
-def find_5stones_close(stone, board, left, stone_list=None):
+def find_5stones_close(stone, board, left, stone_list=None, flag=0):
     ai_move_log = utils.get_ai_move_log()
     away_move_log = utils.get_away_move_log()
     lst = []
@@ -74,8 +75,8 @@ def find_5stones_close(stone, board, left, stone_list=None):
                         lst.extend(tmp_lst)
        
     if len(lst) != 0:
-        lst = utils.get_max_open_point(1, board, lst)
-        board[lst[0][1]][lst[0][0]] = 1
+        if flag == 0:
+            lst = utils.get_max_open_point(1, board, lst)
     
     return lst
 

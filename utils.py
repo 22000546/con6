@@ -156,13 +156,14 @@ def get_max_open_point(stone, board, points):
         point = [(x, y)]
         board[y][x] = 1
         # print("point", point)
-        close5 = len(algo1.find_5stones_close(1, board, 2, point))
-        close4 = len(algo2.find_4stones_close(1, board, 2, point))
+        close5 = len(algo1.find_5stones_close(1, board, 2, point, 1))
+        close4 = len(algo2.find_4stones_close(1, board, 2, point, 1))
         open2 = len(attack2.open2(1, board, point))
         open3 = len(attack2.open3(1, board, point))
         close3 = len(algo4.find_3stones_close(1, board, point))
         defense1 = len(attack2.open2(10, board, point))
         defense2 = len(attack2.open3(10, board, point))
+        board[y][x] = 0
         new_score = open2 + open3 + close3 + close4 + close5
         new_length = [close5, close4, open3, open2, close3, defense2, defense1]
         if new_score > max_open:
@@ -204,7 +205,6 @@ def get_max_open_point(stone, board, points):
                                         max_open = new_score
                                         max_point = point
                                         max_length = new_length
-        board[y][x] = 0
         
     return max_point
 

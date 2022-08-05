@@ -12,6 +12,7 @@ def algo2(stone, board, left):
 		if len(result_tmp) == 0:
 			break
 		else:
+			board[result_tmp[0][1]][result_tmp[0][0]] = 1
 			print("5 close")
 
 	if left == 2:
@@ -25,6 +26,7 @@ def algo2(stone, board, left):
 		if len(result_tmp) == 0:
 			break
 		else:
+			board[result_tmp[0][1]][result_tmp[0][0]] = 1
 			print("semi open")
    
 	while left > 0:
@@ -34,6 +36,7 @@ def algo2(stone, board, left):
 		if len(result_tmp) == 0:
 			break
 		else:
+			board[result_tmp[0][1]][result_tmp[0][0]] = 1
 			print("semi close")
 
 	while left > 0:
@@ -43,6 +46,7 @@ def algo2(stone, board, left):
 		if len(result_tmp) == 0:
 			break
 		else:
+			board[result_tmp[0][1]][result_tmp[0][0]] = 1
 			print("4 close")
   
 	return result
@@ -216,7 +220,6 @@ def find_4stones_semi_open(stone, board, left):
         
     if len(lst) != 0:
         lst = utils.get_max_open_point(1, board, lst)
-        board[lst[0][1]][lst[0][0]] = 1
     
     return lst
 
@@ -290,11 +293,10 @@ def find_4stones_semi_close(stone, board, left):
     
     if len(lst) != 0:
         lst = utils.get_max_open_point(1, board, lst)
-        board[lst[0][1]][lst[0][0]] = 1
     
     return lst
 
-def find_4stones_close(stone, board, left, stone_list=None):
+def find_4stones_close(stone, board, left, stone_list=None, flag=0):
     ai_move_log = utils.get_ai_move_log()
     away_move_log = utils.get_away_move_log()
     lst = []
@@ -347,7 +349,7 @@ def find_4stones_close(stone, board, left, stone_list=None):
                         lst.append((x-j+i, y+j-i))
        
     if len(lst) != 0:
-        lst = utils.get_max_open_point(1, board, lst)
-        board[lst[0][1]][lst[0][0]] = 1
+        if flag == 0:
+            lst = utils.get_max_open_point(1, board, lst)
         
     return lst
