@@ -27,32 +27,49 @@ def find_defense_and_attack(board, left):
         attack_points3.add(p1)
         attack_points3.add(p2)
     # print("attack3", attack_points3)
-    attack_points = attack_points2 | attack_points3
     defense_points2 = attack2.open2(10, board, away_move_log) # 상대방의 열린 2개를 막을 수 있는 지점
     # print("defense2", defense_points2)
     defense_points3 = attack2.open3(10, board, away_move_log) # 상대방의 열린 3개를 막을 수 있는 지점 
     # print("defense3", defense_points3)
-    defense_points = defense_points2 | defense_points3 # 두 지점의 합집합 
-    # print("defense", defense_points)
-    intersect_points = attack_points & defense_points # 두 지점의 교집합
-    # print("intersect", intersect_points)
     
-    if len(intersect_points) == 0:
-        if len(defense_points) == 0:
-            lst = list(attack_points)
-            if len(lst) == 0:
-                return lst
-            else:
-                print("attack")
-        else:
-            lst = list(defense_points)
-            print("defense")
-        lst = utils.get_max_open_point(1, board, lst)
+    
+    intersect1 = attack_points3 & defense_points3
+    intersect2 = attack_points2 & defense_points3
+    intersect3 = attack_points3 & defense_points2
+    intersect4 = attack_points2 & defense_points3
+    
+    # attack3 + defense3
+    if len(intersect1) > 0:
+        lst = utils.get_max_open_point(1, board, list(intersect1))
         board[lst[0][1]][lst[0][0]] = 1
-        return lst
-    
-    lst = utils.get_max_open_point(1, board, list(intersect_points))
-    board[lst[0][1]][lst[0][0]] = 1
-    print("attack + defense")
+        print("attack3 + defense3")
+    elif len(intersect2) > 0:
+        lst = utils.get_max_open_point(1, board, list(intersect2))
+        board[lst[0][1]][lst[0][0]] = 1
+        print("attack2 + defense3")
+    elif len(intersect3) > 0:
+        lst = utils.get_max_open_point(1, board, list(intersect3))
+        board[lst[0][1]][lst[0][0]] = 1
+        print("attack3 + defense2")
+    elif len(intersect4) > 0:
+        lst = utils.get_max_open_point(1, board, list(intersect4))
+        board[lst[0][1]][lst[0][0]] = 1
+        print("attack2 + defense2")
+    elif len(defense_points3) > 0:
+        lst = utils.get_max_open_point(1, board, list(defense_points3))
+        board[lst[0][1]][lst[0][0]] = 1
+        print("defense3")
+    elif len(defense_points2) > 0:
+        lst = utils.get_max_open_point(1, board, list(defense_points2))
+        board[lst[0][1]][lst[0][0]] = 1
+        print("defense2")
+    elif len(attack_points3) > 0:
+        lst = utils.get_max_open_point(1, board, list(attack_points3))
+        board[lst[0][1]][lst[0][0]] = 1
+        print("attack3")
+    elif len(attack_points2) > 0:
+        lst = utils.get_max_open_point(1, board, list(attack_points2))
+        board[lst[0][1]][lst[0][0]] = 1
+        print("attack2")
     
     return lst
