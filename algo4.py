@@ -50,6 +50,7 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
             sum = sum - board[y-i-1][x-i-1] + board[y-i+(num-1)][x-i+(num-1)]
         
         if sum == 4 :
+            flag = sum = 0
             i -= 4
         elif sum == find :
             check = check2 = 0
@@ -63,6 +64,7 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
                 except IndexError:
                     pass
             if check == 4 or check2 == 4:
+                flag = sum = 0
                 i-=3
             else :
                 try:
@@ -105,6 +107,7 @@ def diagonal_RU_search(board, x, y, num, find): # left bottom to right up
             sum = sum - board[y+i+1][x-i-1] + board[y+i-(num-1)][x-i+(num-1)]
         
         if sum == 4 :
+            flag = sum = 0
             i -= 4
         elif sum == find:
             check = check2 = 0
@@ -118,6 +121,7 @@ def diagonal_RU_search(board, x, y, num, find): # left bottom to right up
                 except IndexError:
                     pass 
             if check == 4 or check2 == 4:
+                flag = sum = 0
                 i-=3
             else :
                 try:
@@ -159,6 +163,7 @@ def horizontal_search(board, x, y, num, find):  # left to right
             sum = sum - board[y][x-i-1] + board[y][x-i+(num-1)]
         
         if sum == 4 :
+            flag = sum = 0
             i -= 4
         elif sum == find:
             check = check2 = 0
@@ -172,6 +177,7 @@ def horizontal_search(board, x, y, num, find):  # left to right
                 except IndexError:
                     pass
             if check == 4 or check2 == 4:
+                flag = sum = 0
                 i-=3
             else:
                 try:
@@ -213,6 +219,7 @@ def vertical_search(board, x, y, num, find): # top to bottom
             sum = sum - board[y-i-1][x] + board[y-i+(num-1)][x]
         
         if sum == 4 :
+            flag = sum = 0
             i -= 4
         elif sum == find:
             check = check2 =0
@@ -226,6 +233,7 @@ def vertical_search(board, x, y, num, find): # top to bottom
                 except IndexError:
                     pass
             if check == 4 or check2 == 4:
+                flag = sum = 0
                 i-=3
             else:
                 try:
