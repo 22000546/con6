@@ -165,7 +165,6 @@ def get_max_open_point(stone, board, points):
         defense2 = len(attack2.open3(10, board, point))
         new_score = open2 + open3 + close3 + close4 + close5
         new_length = [close5, close4, open3, open2, close3, defense2, defense1]
-        print("p", point, new_length)
         if new_score > max_open:
             max_open = new_score
             max_point = point
