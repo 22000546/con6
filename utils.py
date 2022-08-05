@@ -14,6 +14,7 @@ last_ai_move = None #[(x,y)] list
 last_away_move = None
 ai_move_log = None
 away_move_log = []
+isBlack = True
 
 def set_ai_move(ai_move):
 	global last_ai_move, ai_move_log
@@ -42,10 +43,11 @@ def get_away_move_log():
     return away_move_log
 
 def make_move(board):
-	global last_ai_move, last_away_move, ai_move_log
+	global last_ai_move, last_away_move, ai_move_log, isBlack
 	left = 2
   
 	if last_ai_move == None:
+		isBlack = False
 		final_result = first.find_first(board)
 		ai_move_log = final_result
 		last_ai_move = final_result
@@ -148,6 +150,7 @@ def get_board(ai_home):
     return board
 
 def get_max_open_point(stone, board, points):
+    global isBlack
     # points = [(x,y), (x,y), ...]
     # print("point", points)
     
@@ -166,7 +169,10 @@ def get_max_open_point(stone, board, points):
         defense2 = len(attack2.open3(10, board, point)) # 상대방 열린 3 막기 
         defense3 = len(attack2.open2(5, board, point)) # 상대방 열린 1 막기 
         new_score = open2 + open3 + close3 + close4 + close5 + defense2 + defense1
-        new_length = [close5, close4, defense2, defense1, open3, open2, close3, defense3]
+        if isBlack :
+            new_length = [close5, close4, defense2, defense1, open3, open2, close3, defense3]
+        else :
+            new_length = [close5, close4, open3, open2, close3, defense2, defense1, defense3] 
         # print("x,y",x,y, "==",new_length)
         if new_score > max_open:
             max_open = new_score
@@ -235,7 +241,10 @@ def get_max_open_points(stone, board, points):
         defense2 = len(attack2.open3(10, board, point))
         defense3 = len(attack2.open2(5, board, point))
         new_score = open2 + open3 + close3 + close4 + close5 + defense2 + defense1
-        new_length = [close5, close4, defense2, defense1, open3, open2, close3, defense3]
+        if isBlack :
+            new_length = [close5, close4, defense2, defense1, open3, open2, close3, defense3]
+        else :
+            new_length = [close5, close4, open3, open2, close3, defense2, defense1, defense3] 
         print("point",point, "==", new_length)
         if new_score > max_open:
             max_open = new_score
