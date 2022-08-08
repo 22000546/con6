@@ -74,8 +74,8 @@ def diagonal_RD_search(board, x, y, num, find): # left top to right down
                     continue 
                 RD.append((x-i,y-i))
 
-    if len(RD) > 0:
-        print("RD", RD, "x,y", x, y)
+    # if len(RD) > 0:
+    #     print("RD", RD, "x,y", x, y)
     
     res = []
     if len(RD) > 0:
@@ -131,8 +131,8 @@ def diagonal_RU_search(board, x, y, num, find): # left bottom to right up
                     continue 
                 RU.append((x-i,y+i))
     
-    if len(RU) > 0:
-        print("RU", RU, "x,y", x, y)
+    # if len(RU) > 0:
+    #     print("RU", RU, "x,y", x, y)
     
     res = []
     if len(RU) > 0:
@@ -187,8 +187,8 @@ def horizontal_search(board, x, y, num, find):  # left to right
                     continue 
                 hori.append((x-i,y))
         
-    if len(hori) > 0 :
-        print("hori", hori, "x,y", x, y)
+    # if len(hori) > 0 :
+    #     print("hori", hori, "x,y", x, y)
     
     res = []
     if len(hori) > 0:
@@ -243,8 +243,8 @@ def vertical_search(board, x, y, num, find): # top to bottom
                     continue 
                 ver.append((x,y-i))
     
-    if len(ver) >0 :
-        print("ver", ver, "x,y", x, y)
+    # if len(ver) >0 :
+    #     print("ver", ver, "x,y", x, y)
     
     res = []
     if len(ver) > 0:
@@ -282,7 +282,7 @@ def algo4(left, stone, board):
             return ret 
         print("find 2stones close")
 
-        print("res",res)
+        # print("res",res)
         for set in res:
             for points in set:
                 [(x1, y1), (x2, y2)] = points
