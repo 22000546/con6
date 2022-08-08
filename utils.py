@@ -168,10 +168,11 @@ def get_max_open_point(stone, board, points):
         defense1 = len(attack2.open2(10, board, point)) # 상대방 열린 2 막기 
         defense2 = len(attack2.open3(10, board, point)) # 상대방 열린 3 막기 
         defense3 = len(attack2.open2(5, board, point)) # 상대방 열린 1 막기 
-        new_score = open2 + open3 + close3 + close4 + close5 + defense2 + defense1
         if isBlack :
+            new_score = open2 + open3 + close3 + close4 + close5 + defense1 + defense2
             new_length = [close5, close4, defense2, defense1, open3, open2, close3, defense3]
         else :
+            new_score = open2 + open3 + close3 + close4 + close5
             new_length = [close5, close4, open3, open2, close3, defense2, defense1, defense3] 
         # print("x,y",x,y, "==",new_length)
         if new_score > max_open:
@@ -240,12 +241,13 @@ def get_max_open_points(stone, board, points):
         defense1 = len(attack2.open2(10, board, point))
         defense2 = len(attack2.open3(10, board, point))
         defense3 = len(attack2.open2(5, board, point))
-        new_score = open2 + open3 + close3 + close4 + close5 + defense2 + defense1
         if isBlack :
+            new_score = open2 + open3 + close3 + close4 + close5 + defense1 + defense2
             new_length = [close5, close4, defense2, defense1, open3, open2, close3, defense3]
         else :
+            new_score = open2 + open3 + close3 + close4 + close5
             new_length = [close5, close4, open3, open2, close3, defense2, defense1, defense3] 
-        print("point",point, "==", new_length)
+        # print("point",point, "==", new_length)
         if new_score > max_open:
             max_open = new_score
             max_points = point
